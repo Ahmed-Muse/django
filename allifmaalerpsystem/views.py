@@ -386,7 +386,7 @@ def add_category(request):
     form_category = CategoryCreateForm(request.POST or None)
     if form_category.is_valid():
         form_category.save()
-        messages.success(request, 'Successfully Created')
+        messages.success(request, 'Successfully has been created')
         #return redirect('/stock')
     context = {
 		"form": form_category,
