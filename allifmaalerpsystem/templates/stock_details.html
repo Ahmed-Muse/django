@@ -1,0 +1,76 @@
+
+{% load crispy_forms_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+
+    <title> Allifmaal Stock Management System </title>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet"/>
+
+
+</head>
+<body>
+    <link href="{% static 'css/style2.css' %}" rel="stylesheet">
+    <a href="/">Website</a>
+    
+   <hr><br>
+
+  
+
+<!--start of deleted succesfully messge-->
+{% if messages %}
+<ul class="messages">
+       {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+       {% endfor %}
+</ul>
+{% endif %}
+<!-- end of deleted succesfully messge-->
+
+
+<div class="container">
+    <div class="row">
+        <div class="col md-12">
+            <div class="jumbotron p-3">
+                <div class="header">{{header}}</div>
+                
+
+                <!-- start of link section 27 june 2021 2pm-->
+                
+            
+                <a href="{% url 'issue_items' query_table_content.id %}">
+                    <div class="btn btn-danger"> Issue</div>
+                    </a>
+                    
+                    <a href="{% url 'receive_items' query_table_content.id %}">
+                      <div class="btn btn-primary"> Receive</div>
+                      <a href="/stock">Stock</a> 
+                    </a><br><br>
+                    <!-- end of link section 27 june 2021 2pm-->
+                
+        <div class="display_table">
+          <table class='table'>
+                  <tr>
+                    <th>Part Number</th>
+                    <th>Quantity in store</th>
+                    <th>Last updated</th>
+                    <th>Reorder Level</th>
+                  </tr>
+                  <tr>
+                    <td>{{query_table_content.part_number}}</td>
+                    
+                    <td>{{query_table_content.quantity_in_store}}</td>
+                    <td>{{query_table_content.last_updated}}</td>
+                    <td>{{query_table_content.reorder_level}}</td>
+                  </tr>
+          </table>
+        </div>
+        </div>
+</div>
+</div>
+</div>
+        </div>
+    </body>
+    </html>

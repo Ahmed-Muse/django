@@ -1,0 +1,84 @@
+{% load static %}
+<link href="{% static 'css/style.css' %}" rel="stylesheet">
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#myPage">Allifmaal</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#about">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#portfolio">Porfolio</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#contact">Contacts</a></li>
+
+        {% if request.user.is_authenticated %}  
+        <li class="nav-item"><a class="nav-link" href="/customers">Customers</a></li>
+        <li class="nav-item"><a class="nav-link" href="stock">Stock</a></li>
+        <li class="nav-item"><a class="nav-link" href="hrm">HRM</a></li>
+        <li class="nav-item"><a class="nav-link" href="sales">Sales</a></li>
+        <li class="nav-item"><a class="nav-link" href="eshop">eshop</a></li>
+
+
+        <!--start of modal content-->
+        <a href="#"><div id="version-display" data-toggle="modal" data-target="#myModal">V:1.0</div></a>
+  <div id="myModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+          <!-- Modal content-->
+            <div class="modal-content">
+              
+                <div class="modal-header">
+                    <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                    <h4 class="modal-title">System Information</h4>
+                </div>
+                
+                <div class="modal-body">
+                    <div class="dev-info">
+                      <p class=""><b>STOCK MANAGEMENT INFORMATION SYSTEMS</b></p>
+                      <p>VERSION: 1.O</p><br>
+
+                      <p class="modal-header">Allifmaal:</p>
+                      <p>Allifmaalerpsystem</p>
+                      <p>www.allifmaal.com</p>
+                      <p>info@allifmaal.com</p>
+                      <a href="http://www.allifmaal.com" target="_blank">
+                      <p><img src="/static/images/logo.png" alt="Developer Logo"></p>  </a>           
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+      </div>
+  </div>
+
+<!--end of modal content-->
+        {% endif %}
+        
+
+
+
+        
+
+
+
+        <ul class="navbar-nav">
+          {% if request.user.is_authenticated %}
+          <li><a href="/accounts/logout"><button class="btn btn-danger">{{ user }} | Logout</button></a></li>
+          {% else %}
+          <li><a href="/accounts/login">Login</a></li>
+          {% endif %}
+      </ul>
+
+      </ul>
+    </div>
+  </div>
+</nav>

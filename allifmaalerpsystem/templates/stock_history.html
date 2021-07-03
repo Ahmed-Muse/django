@@ -1,0 +1,96 @@
+
+{% load crispy_forms_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+
+    <title> Allifmaal Stock Management System </title>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet"/>
+
+
+<!--start of jquery for calender-->
+
+<link href="{% static 'js/jquery-ui-1.12.1/jquery-ui.min.css' %}" rel="stylesheet">
+<link href="{% static 'js/jquery-ui-1.12.1/jquery-ui.structure.min.css' %}" rel="stylesheet">
+<link href="{% static 'js/jquery-ui-1.12.1/jquery-ui.theme.min.css' %}" rel="stylesheet">
+
+<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'js/jquery-ui-1.12.1/jquery-ui.min.js' %}"></script>
+<script src="{% static 'js/myjs.js' %}"></script>
+
+<!--end of jquery for calender-->
+
+
+</head>
+<body>
+    <link href="{% static 'css/style2.css' %}" rel="stylesheet">
+    <a href="/">Website</a>
+    <a href="/stock">Stock</a> 
+   <hr><br>
+
+  
+<br>
+<!-- end of the search form-->
+
+<!--start of deleted succesfully messge-->
+{% if messages %}
+<ul class="messages">
+       {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+       {% endfor %}
+</ul>
+{% endif %}
+<!-- end of deleted succesfully messge-->
+
+<form class="form-inline mt-2 mt-md-0"  method='POST' action=''> {% csrf_token %}
+  {{form}}
+<!--<input class="form-control mr-sm-2" type="submit" placeholder="Search" aria-label="Search">-->
+<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+</form>
+<div class="display_table">
+    <table class='table'>
+      <thead>
+        <tr>
+          <th>COUNT</th>
+          <th>ID</th>
+          <th>PART_NUMBER</th>
+          <th>DESCRIPTION</th>
+          <th>QUANTITY IN STORE</th>
+          <th>ISSUE QUANTITY</th>
+          <th>RECEIVE QUANTITY</th>
+          <th>Issue_by</th>
+          <th>Received_by</th>
+          
+          <th>LAST UPDATED</th>
+          
+          <th>delete</th>
+        </tr>
+      </thead>
+    {% for instance in query_table_content %}
+        <tr>
+
+          <td>{{forloop.counter}}</td>
+          <td>{{instance.id}}</td>
+          <td>{{instance.part_number}}</td>
+          <td>{{instance.description}}</td>
+          <td>{{instance.quantity_in_store}}</td>
+          <td>{{instance.issue_quantity}}</td>
+          <td>{{instance.receive_quantity}}</td>
+          <td>{{instance.issue_by}}</td>
+          <td>{{instance.receive_by}}</td>
+          <td>{{instance.last_updated}}</td>
+          <td> <a href="{% url 'delete_history_record' instance.id %}">Delete</a></td>
+              
+          
+          
+        </tr>
+    {% endfor %}
+  </table>
+</div>
+
+    </body>
+    <script src="{% static 'js/pager/paging.js' %}"></script>
+    <script src="{% static 'js/myjs.js' %}"></script>
+    </html>

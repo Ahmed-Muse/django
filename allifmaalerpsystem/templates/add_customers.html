@@ -1,0 +1,35 @@
+{% load crispy_forms_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{title}}</title>
+    
+</head>
+<body>
+    <link href="{% static 'css/style2.css' %}" rel="stylesheet">
+    <li><a href="/">Website</a></li> 
+    <li><a href="/customers">Customers</a></li>
+    <hr><br>
+
+    <!--start of customer added succesfully messge-->
+    {% if messages %}
+    <ul class="messages">
+           {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+           {% endfor %}
+   </ul>
+{% endif %}
+<!-- of customer added succesfully messge-->
+
+
+	<form method='POST' action=''>{% csrf_token %}
+		{{form|crispy}}<br><!-- this form is imported from the views under add_customers function and it was initially creaate
+        in the forms.py file-->
+        <input type="submit" value='Save'/>
+    </form>
+
+    
+    
+</body>
+</html>
