@@ -11,7 +11,7 @@ urlpatterns = [
     path('add_stock/',views.add_stock,name='add_stock'),
     path('hrm/',views.hrm,name='hrm'),
     path('add_staff/',views.add_staff,name='add_staff'),
-    path('sales/',views.sales,name='sales'),
+    path('dashboard/',views.dashboard,name='dashboard'),
     path('eshop/',views.eshop,name='eshop'),
     path('update_customers/<str:pk>/', views.update_customers, name="update_customers"),
     
@@ -32,6 +32,8 @@ urlpatterns = [
     path('stock_history/', views.stock_history, name='stock_history'),
     path('delete_history_record/<str:pk>/', views.delete_history_record, name="delete_history_record"),
     path('add_category/', views.add_category, name='add_category'),
+    path('calc/', views.calc, name='calc'),
+    path('vehicles/', views.vehicles, name='vehicles'),
     
     
 

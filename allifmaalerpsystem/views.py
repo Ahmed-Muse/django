@@ -21,7 +21,7 @@ def index(request):
     
     
     return render(request,'index.html',context)
-@login_required
+#@login_required
 def customers(request):
     title="Allifmaal Customers"
     query_table_content = AllifmaalCustomersTable.objects.all()#assign all the objects in the table to the variable
@@ -80,7 +80,7 @@ def add_stock(request):
     
     return render(request,'add_stock.html',context)
 
-@login_required
+#@login_required
 def stock(request):
     header="Allifmaal Stock Management System "
     query_table_content = AllifmaalStockTable.objects.all()#assign all the objects in the table to the variable
@@ -101,12 +101,12 @@ def stock(request):
     if form['csv'].value() == True:
             response = HttpResponse(content_type='text/csv')
             response['Content-Disposition'] = 'attachment; filename="List of stock.csv"'
-            writer = csv.writer(response)
+            ''' writer = csv.writer(response)#this is showing error so comments out all
             writer.writerow(['PART_NUMBER', 'DESCRIPTION', 'QUANTITY_IN_STORE','PRICE','COMMENTS'])
             instance = query_table_content
             for stock in instance:
                 writer.writerow([stock.part_number, stock.description,stock.quantity_in_store,stock.price,stock.comments])
-            return response
+            return response '''
         
         ### end of section for exporting data in CSV format
         
@@ -134,7 +134,7 @@ def add_staff(request):
 	}
     
     return render(request,'add_staff.html',context)
-@login_required
+#@login_required
 def hrm(request):
     header="Allifmaal HRM Management System "
     query_table_content = AllifmaalHRMTable.objects.all()#assign all the objects in the table to the variable
@@ -159,8 +159,8 @@ def hrm(request):
     return render(request,'hrm.html',context)
 
 
-@login_required
-def sales(request):
+#@login_required
+def dashboard(request):
     header="Allifmaal Sales Management System"
     
     context = {
@@ -169,8 +169,8 @@ def sales(request):
 	}
     
     
-    return render(request,'sales.html',context)
-@login_required
+    return render(request,'dashboard.html',context)
+#@login_required
 def eshop(request):
     header="Allifmaal Online Shop Management System"
     
@@ -293,6 +293,7 @@ def issue_items(request, pk):
         messages.success(request, "Issued SUCCESSFULLY. " + str(instance.quantity_in_store) + " " + str(instance.part_number) + "s now left in Store")
         instance.issue_by=str(request.user)
         instance.save()
+        
         return redirect('/stock_details/'+str(instance.id))
     context = {
 		"title": 'Issue ' + str(query_table_content.part_number),
@@ -338,7 +339,7 @@ def reorder_level(request,pk):
     return render(request,"add_stock.html",context)
 
 #view for history table
-@login_required
+#@login_required
 def stock_history(request):
     header = 'LIST OF ITEMS'
     query_table_content = AllifmaalStockHistoryTable.objects.all()
@@ -374,6 +375,7 @@ def stock_history(request):
 def delete_history_record(request,pk):
     query_table_content=AllifmaalStockHistoryTable.objects.get(id=pk)
     if request.method =="POST":
+        
         query_table_content.delete()
         messages.success(request,'Item deleted successfully')
         return redirect('/stock')
@@ -393,4 +395,29 @@ def add_category(request):
 		"title": "Add Category",
 	}
     return render(request, "add_stock.html", context)
+
+
+#calculator page  
+
+def calc(request):
+    title="calculator"
+    
+    context = {
+	
+ "title":title,
+    
+	}
+    
+    return render(request,'calc.html',context)
+
+def vehicles(request):
+    header="Allifmaal Online Shop Management System"
+    
+    context = {
+	"header": header,
+    
+	}
+    
+    
+    return render(request,'vehicles.html',context)
 

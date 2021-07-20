@@ -26,7 +26,7 @@ urlpatterns = [
      path('add_stock/',include('allifmaalerpsystem.urls')),
      path('hrm/',include('allifmaalerpsystem.urls')),
      path('add_staff/',include('allifmaalerpsystem.urls')),
-     path('sales/',include('allifmaalerpsystem.urls')),
+     path('dashboard/',include('allifmaalerpsystem.urls')),
      path('eshop/',include('allifmaalerpsystem.urls')),
      path('update_customers/',include('allifmaalerpsystem.urls')),
      
@@ -43,6 +43,8 @@ urlpatterns = [
      path('stock_history/', include('registration.backends.default.urls')),
      path('delete_history_record/', include('registration.backends.default.urls')),
      path('add_category/', include('registration.backends.default.urls')),
+     path('calc/', include('registration.backends.default.urls')),
+     path('vehicles/', include('registration.backends.default.urls')),
      
     
      

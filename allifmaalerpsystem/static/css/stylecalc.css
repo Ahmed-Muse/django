@@ -1,0 +1,60 @@
+/*Align the title to the center of the page*/
+*,*::before,*::after {
+    box-sizing: border-box;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: normal;
+}
+body {
+    padding: 0;
+    margin: 0;
+    background:linear-gradient(to right, #00AAFF, #00ff6c)
+}
+.calculator-grid {
+    display:grid;
+    justify-content:center;
+    align-content: center;
+    min-height: 100vh;/*this means fill 100% of the height all the time*/
+    grid-template-columns: repeat(4, 100px); /*this will make buttons look like normal buttons*/
+    grid-template-rows: minmax(120px, auto), repeat(5, 100px); /*minimum 120px and maximum at auto*/
+
+}
+
+/* */
+/* style all buttons*/
+.calculator-grid > button {
+    cursor: pointer;/* ensures that you get pointer when you hover over the button*/
+    font-size: 2rem;
+    border: 1px solid lightblue;
+    outline:none;
+    background-color: rgba(255,255,255, .75);/* .75 means it will be 75% opaque */
+
+}
+.calculator-grid > button:hover{
+    background-color: rgba(255,255,255, .90);/* .75 means it will be 75% opaque */
+
+
+}
+.span-two {
+    grid-column:span 2;
+}
+.outputscreen{
+    grid-column: 1 / -1; /* this means span from first column to last column*/
+    background-color: rgba(0,0,0,.75);
+    display: flex; /*aligns the elements in the container */
+    align-items: flex-end; /*put items on the flex end right of the container */
+    justify-content: space-around;
+    flex-direction:column;/* ensures contents is on column rather than horizontal*/
+    padding: 10px;
+    word-wrap: break-word;/* break when space is full  go tto next line*/
+    word-break:break-all;
+}
+.outputscreen .previous-number{
+    color: rgba(255,255,255, .75);
+    font-size: 1.5rem;
+
+}
+.outputscreen .current-number{
+    color: white;
+    font-size: 2.5rem;
+
+}
