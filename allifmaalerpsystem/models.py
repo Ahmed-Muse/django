@@ -88,3 +88,42 @@ class Category(models.Model):
     category_name = models.CharField(max_length=100, blank=True, null=True)
     def __str__(self):
         return self.category_name
+
+
+
+#Choice field
+primary_meter_options = (
+		('Kilometers', 'Kilometers'),
+		('Miles', 'Miles'),
+	)
+vehicle_type_options = (
+		('Truck', 'Truck'),
+		('Car', 'Car'),
+        ('Pickup','Pickup'),
+        ('Bus', 'Bus'),
+        ('Trailer', 'Trailer'),
+        ('Van','Van'),
+        ('Tow Truck','Tow Truck'),
+        ('Motorcycle','Motorcycle'),
+	)
+vehicle_status_options = (
+		('Active', 'Active'),
+		('Inactive', 'Inactive'),
+	)
+class AllifmaalVehiclesTable(models.Model):
+    vehicle_name = models.CharField(max_length=255, blank=True, null=True)
+    vehicle_make = models.CharField(max_length=255, blank=True, null=True)
+    vehicle_model = models.CharField(max_length=255, blank=True, null=True)
+    year = models.CharField(max_length=255, blank=True, null=True)
+    license = models.CharField(max_length=255, blank=True, null=True)
+    vin = models.CharField(max_length=255, blank=True, null=True)
+    starting_odometer = models.IntegerField(default='0',blank=True,null=True)
+    primary_meter = models.CharField(max_length=255, blank=True, null=True,choices=primary_meter_options)
+    vehicle_type = models.CharField(max_length=255, blank=True, null=True,choices=vehicle_type_options)
+    vehicle_status = models.CharField(max_length=255, blank=True, null=True,choices=vehicle_status_options)
+    
+    
+    
+    def __str__(self):
+    		return self.vehicle_name + ' ' + self.vehicle_make + ' ' + self.vehicle_model# this will show up in the admin area
+  

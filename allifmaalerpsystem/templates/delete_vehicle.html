@@ -1,0 +1,22 @@
+{% load crispy_forms_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{title}}</title>
+    
+</head>
+<body>
+    <link href="{% static 'css/style2.css' %}" rel="stylesheet">
+    <li><a href="/">Website</a></li> 
+    <li><a href="/customers">Customers</a></li>
+    <hr><br>
+    
+	<form method="post" action="">
+        {% csrf_token %}
+          <h1>Are you sure you want to delete?</h1><br>
+          <input class="btn btn-danger" type="submit" value="Yes" />
+          <a href="/vehicles"><div class="btn btn-primary">Cancel</div></a>
+     </form>
+</body>
+</html>

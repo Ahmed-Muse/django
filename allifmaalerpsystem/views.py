@@ -412,12 +412,44 @@ def calc(request):
 
 def vehicles(request):
     header="Allifmaal Online Shop Management System"
+    query_table_content = AllifmaalVehiclesTable.objects.all()
+    form=AddVehicleDetailsForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        messages.success(request, 'Vehicle added successfully')
     
     context = {
 	"header": header,
+    "form":form,
+    "query_table_content":query_table_content,
     
 	}
     
     
     return render(request,'vehicles.html',context)
+
+def delete_vehicle(request,pk):
+    query_table_content=AllifmaalVehiclesTable.objects.get(id=pk)
+    if request.method =="POST":
+        query_table_content.delete()
+        messages.success(request,'Item deleted successfully')
+        return redirect('/vehicles')
+    return render(request,'delete_vehicle.html')
+
+
+def update_vehicle_details(request, pk):
+    query_table_content= AllifmaalVehiclesTable.objects.get(id=pk)
+    form = VehicleDetailsUpdateForm(instance=query_table_content)#insert the content of the table stored in the selected id in the update form
+    #we could have used the add customer form but the validation will refuse us to update since fields may exist
+    if request.method == 'POST':
+        form = VehicleDetailsUpdateForm(request.POST, instance=query_table_content)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Vehicle updated successfully')
+            return redirect('/vehicles')
+    context = {
+		'form':form
+    }
+    return render(request, 'add_vehicle_details.html', context)
+
 

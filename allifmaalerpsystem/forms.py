@@ -137,4 +137,19 @@ class CategoryCreateForm(forms.ModelForm):
     class Meta:
         model = Category
         fields = ['category_name']
+
+
+class AddVehicleDetailsForm(forms.ModelForm): #the forms here is the one imported up there.
+    class Meta:
+        model = AllifmaalVehiclesTable
+        text_fields = ['vehicle_name', 'vehicle_make', 'vehicle_model',
+                       'year','license','vin','starting_odometer','primary_meter','vehicle_type','vehicle_status']
+        fields='__all__'# this was used because of an error when running and the error said " .
         
+
+class VehicleDetailsUpdateForm(forms.ModelForm):
+    class Meta:
+        model = AllifmaalVehiclesTable
+        fields = ['vehicle_name', 'vehicle_make', 'vehicle_model',
+                       'year','license','vin','starting_odometer','primary_meter','vehicle_type','vehicle_status']
+        fields='__all__'

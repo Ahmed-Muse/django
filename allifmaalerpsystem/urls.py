@@ -34,6 +34,10 @@ urlpatterns = [
     path('add_category/', views.add_category, name='add_category'),
     path('calc/', views.calc, name='calc'),
     path('vehicles/', views.vehicles, name='vehicles'),
+    path('delete_vehicle/<str:pk>/', views.delete_vehicle, name="delete_vehicle"),
+    path('update_vehicle_details/<str:pk>/', views.update_vehicle_details, name="update_vehicle_details"),
+    
+    
     
     
 

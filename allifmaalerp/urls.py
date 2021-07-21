@@ -45,6 +45,8 @@ urlpatterns = [
      path('add_category/', include('registration.backends.default.urls')),
      path('calc/', include('registration.backends.default.urls')),
      path('vehicles/', include('registration.backends.default.urls')),
+     path('delete_vehicle/',include('allifmaalerpsystem.urls')),
+     path('update_vehicle_details/',include('allifmaalerpsystem.urls')),
      
     
      
