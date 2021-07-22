@@ -2,6 +2,9 @@ from django.shortcuts import render, HttpResponse, redirect
 from .models import *
 from .forms import *
 from django.contrib import messages
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
+from .forms import UploadFileForm
 
 #for exporting data in CSV format
 from django.http import HttpResponse
@@ -452,4 +455,21 @@ def update_vehicle_details(request, pk):
     }
     return render(request, 'add_vehicle_details.html', context)
 
+
+#for uploading files to
+def upload_file(request):
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            handle_uploaded_file(request.FILES['file'])
+            return HttpResponseRedirect('/calc')
+    else:
+        form = UploadFileForm()
+    return render(request, 'calc.html', {'form': form})
+
+def handle_uploaded_file(f):
+    with open('some/file/name.txt', 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
+            
 

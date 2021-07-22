@@ -58,7 +58,7 @@ ROOT_URLCONF = 'allifmaalerp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],#THIS WAS EMPTY BUT WE DID FOR UPLOADING FILES
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -131,7 +131,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+STATICFILES_LOCATION='static'
+
 STATIC_URL = '/static/'
+STATIC_ROOT='static'
 STATICFILES_DIRS =[os.path.join(BASE_DIR,'allifmaalerpsystem/static')]
 STATIC_ROOT = os.path.join(BASE_DIR,'static')#THIS IS FOR PRODUCTION
 
@@ -145,3 +148,7 @@ ACCOUNT_ACTIVATION=7#one week activation window
 REGISTRATION_AUTO_LOGIN=True#automatically log the user in the next time to come back
 SITE_ID=1 #this is the first site of the django app...so we are associating this with site of id of 1
 LOGIN_REDIRECT_URL='/'#once you login, you will be redirected to the home page...you can redirect to any page
+
+#PATH WHERE UPLOADED FILES WILL BE STORED...in the media folder
+MEDIA_ROOT=os.path.join(BASE_DIR,'media')
+MEDIA_URL='/media/'#fetch images/media using this path

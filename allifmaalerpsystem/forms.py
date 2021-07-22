@@ -153,3 +153,8 @@ class VehicleDetailsUpdateForm(forms.ModelForm):
         fields = ['vehicle_name', 'vehicle_make', 'vehicle_model',
                        'year','license','vin','starting_odometer','primary_meter','vehicle_type','vehicle_status']
         fields='__all__'
+
+#form to upload files
+class UploadFileForm(forms.Form):
+    title = forms.CharField(max_length=50)
+    file = forms.FileField()
