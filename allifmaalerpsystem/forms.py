@@ -158,3 +158,9 @@ class VehicleDetailsUpdateForm(forms.ModelForm):
 class UploadFileForm(forms.Form):
     title = forms.CharField(max_length=50)
     file = forms.FileField()
+    
+class UploadBookForm(forms.ModelForm):
+    class Meta:
+        model = UploadFileTable1
+        fields = ['title', 'author', 'image_file','cover']
+        fields='__all__'

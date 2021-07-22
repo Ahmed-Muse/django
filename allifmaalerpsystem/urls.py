@@ -7,7 +7,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('',views.index,name='index'),# here do not execute index by typing index(), but just point to it by typing index
-    path('customers/',views.customers,name='customers'),
+    path('customers/',views.customers,name='customers'),#the first 'customers' should be html name, second views name, 3rd you can change even
     path('add_customers/',views.add_customers,name='add_customers'),
     path('stock/',views.stock,name='stock'),
     path('add_stock/',views.add_stock,name='add_stock'),
@@ -39,8 +39,14 @@ urlpatterns = [
     path('delete_vehicle/<str:pk>/', views.delete_vehicle, name="delete_vehicle"),
     path('update_vehicle_details/<str:pk>/', views.update_vehicle_details, name="update_vehicle_details"),
     
+    #path('upload_file/', views.upload_file, name='upload_file'),
+    path('upload/', views.uploadfile, name='upload'),
+    path('book_list/', views.book_list, name='book_list'),
+    path('upload_book/', views.upload_book, name='upload_book'),
     
     
     
 
-]
+] 
+if settings.DEBUG:#if debug which is in development stage only, then add the path below
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)#this will enable django to display the uploaded files

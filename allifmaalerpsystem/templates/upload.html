@@ -1,0 +1,30 @@
+{% load crispy_forms_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{title}}</title>
+    
+</head>
+<body>
+    
+    <li><a href="/">Website</a></li> 
+    <li><a href="/customers">Customers</a></li>
+    <hr><br>
+    
+	
+          {% block content %}
+          <h1>Upload Files Here</h1>
+          <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="document">
+            <button type="submit">Upload file</button>
+        </form>
+
+        {% if url %}
+        <p> uploaded file: <a href="{{url}}">{{url}}</a></p>
+        {% endif %}
+          {% endblock %}
+    
+</body>
+</html>

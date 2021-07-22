@@ -151,4 +151,4 @@ LOGIN_REDIRECT_URL='/'#once you login, you will be redirected to the home page..
 
 #PATH WHERE UPLOADED FILES WILL BE STORED...in the media folder
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
-MEDIA_URL='/media/'#fetch images/media using this path
+MEDIA_URL='/media/'#fetch images/media using this path when viewing through the browser

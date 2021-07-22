@@ -1,0 +1,26 @@
+{% load crispy_forms_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{title}}</title>
+    
+</head>
+<body>
+    
+    <li><a href="/">Website</a></li> 
+    <li><a href="/customers">Customers</a></li>
+    <hr><br>
+    
+	
+          {% block content %}
+          <h1>UPLOAD BOOK</h1>
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+              {{form.as_p}}
+              <button type="submit" class="btn btn-primary">uload boook</button>
+          </form>
+          {% endblock %}
+    
+</body>
+</html>

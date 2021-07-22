@@ -13,9 +13,15 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
+
+
+
 from django.contrib import admin
 from django.urls import path, include
 from allifmaalerpsystem import views
+from django.conf import settings#for uploading files
+from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     #path('', views.index, name='index'),
@@ -47,11 +53,12 @@ urlpatterns = [
      path('vehicles/', include('registration.backends.default.urls')),
      path('delete_vehicle/',include('allifmaalerpsystem.urls')),
      path('update_vehicle_details/',include('allifmaalerpsystem.urls')),
-     
-    
-     
-     
-     
+     #path('upload_file/',include('allifmaalerpsystem.urls')),
+     path('upload/',include('allifmaalerpsystem.urls')),#you can leave this out... try it.
+     path('upload_book/',include('allifmaalerpsystem.urls')),
+     path('book_list/',include('allifmaalerpsystem.urls')),
     
       
 ]
+#if settings.DEBUG:#if debug which is in development stage only, then add the path below
+    #urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)#

@@ -10,7 +10,7 @@ from .forms import UploadFileForm
 from django.http import HttpResponse
 import csv
 from django.contrib.auth.decorators import login_required#required for login to work
-
+from django.core.files.storage import FileSystemStorage#for storing uploaded files
 # Create your views here.
 def index(request):
     title="Allifmaal System"
@@ -456,20 +456,35 @@ def update_vehicle_details(request, pk):
     return render(request, 'add_vehicle_details.html', context)
 
 
-#for uploading files to
-def upload_file(request):
+
+def uploadfile(request):
+    context={}
     if request.method == 'POST':
-        form = UploadFileForm(request.POST, request.FILES)
+        upload_file=request.FILES['document']# this name document is the name of the html input in the form there
+        file_stored=FileSystemStorage()
+        #file_stored.save(upload_file.name, upload_file)#saves to the directory
+        name=file_stored.save(upload_file.name, upload_file)
+        context['url']=file_stored.url(name)#this gives you url link of the file on the page.
+       
+        
+    return render(request, 'upload.html',context)
+
+
+
+def book_list(request):
+    books=UploadFileTable1.objects.all()
+    
+        
+    return render(request, 'book_list.html',{'books':books})
+
+def upload_book(request):
+    if request.method == 'POST':
+        form=UploadBookForm(request.POST,request.FILES)
         if form.is_valid():
-            handle_uploaded_file(request.FILES['file'])
-            return HttpResponseRedirect('/calc')
+            form.save()
+            return redirect('book_list')
     else:
-        form = UploadFileForm()
-    return render(request, 'calc.html', {'form': form})
-
-def handle_uploaded_file(f):
-    with open('some/file/name.txt', 'wb+') as destination:
-        for chunk in f.chunks():
-            destination.write(chunk)
-            
-
+        form=UploadBookForm()
+    
+        
+    return render(request, 'upload_book.html',{'form':form})
