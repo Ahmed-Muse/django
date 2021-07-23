@@ -110,7 +110,8 @@ vehicle_status_options = (
 		('Active', 'Active'),
 		('Inactive', 'Inactive'),
 	)
-class AllifmaalVehiclesTable(models.Model):
+class AllifmaalVehiclesTable1(models.Model):
+    vehicle_image=models.ImageField(upload_to='books/covers/',null=True, blank=True)
     vehicle_name = models.CharField(max_length=255, blank=True, null=True)
     vehicle_make = models.CharField(max_length=255, blank=True, null=True)
     vehicle_model = models.CharField(max_length=255, blank=True, null=True)

@@ -20,6 +20,41 @@
               {{form.as_p}}
               <button type="submit" class="btn btn-primary">uload boook</button>
           </form>
+
+
+          <h1>books</h1>
+         <p>
+            
+         </p>
+         <table class="table mb-0">
+             <thead>
+                 <tr>
+                     
+                     <th>cover</th>
+                     <th>Title</th>
+                     <th>Author</th>
+                     <th>Download</th>
+                 </tr>
+             </thead>
+             <tbody>
+
+                {% for book in books %}
+                <tr>
+                <td>
+                    {% if book.cover %}
+                    <img src="{{book.cover.url}}" alt="{{book.title}}" style="width: 100px;">
+                    {% else %}
+                    <span class="text-muted">No cover</span>
+                    {% endif %}
+                </td>
+                <td>{{book.title}}</td>
+                <td>{{book.author}}</td>
+                
+                <td> <a href="{{ book.image_files.url }}" class="btn btn-primary btn-sm" target="_blank" > Download pdf</a></td>
+                {% endfor %}
+                </tr>
+             </tbody>
+         </table>
           {% endblock %}
     
 </body>

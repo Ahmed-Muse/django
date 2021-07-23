@@ -40,10 +40,11 @@ urlpatterns = [
     path('update_vehicle_details/<str:pk>/', views.update_vehicle_details, name="update_vehicle_details"),
     
     #path('upload_file/', views.upload_file, name='upload_file'),
-    path('upload/', views.uploadfile, name='upload'),
+    
     path('book_list/', views.book_list, name='book_list'),
     path('upload_book/', views.upload_book, name='upload_book'),
     path('practice/', views.practicepage, name='practice'),
+     path('base1/', views.base1, name='base'),
     
     
     

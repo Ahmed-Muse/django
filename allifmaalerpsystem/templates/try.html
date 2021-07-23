@@ -1,0 +1,142 @@
+{% extends 'dashboard.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+{% endblock %}
+################################################################
+################################################################
+
+################################################################
+
+{% load crispy_forms_tags %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{title}}</title>
+    <!--start for the modal part-->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!--end for the modal part-->
+
+
+    
+    
+	
+    <!-- end of coppying-->
+    
+</head>
+<body>
+    <link href="{% static 'css/style2.css' %}" rel="stylesheet">
+    <a href="/" class="dashboard">Website</a>
+    <a href="/dashboard" class="dashboard">Dashboard</a>
+    <hr>
+   
+
+<!--start of table section-->
+<div class="content-inner">
+    <!-- Page Header-->
+    <header class="page-header">
+      <div class="container-fluid">
+        <h2 class="no-margin-bottom">Vehicle Management
+         <!-- Trigger the modal with a button -->
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add vehicle</button>
+  </h2>
+      </div>
+    </header>
+    <!-- Breadcrumb-->
+    
+    <!-- Forms Section-->
+
+    <section class="forms" >
+  
+      <div class="container-fluid" style="padding: 10px;" id='notification-banner'>
+        <div class="row">
+         
+          <div class="col-lg-12">  <div class="card">
+          
+              
+              <div class="table-responsive">                       
+                  <table class="table table-striped table-hover " id="myTable">
+                  <thead>
+                                                  
+                      <tr >
+                          <th>Vehicle Image</th>
+                          
+                  <th>Vehicle Name</th>
+                  <th >Year</th>
+                  <th >Type</th>
+                  <th>Status</th>
+                  <th>Action</th>							
+                      </tr>
+                      {% for records in query_table_content %}
+
+            
+                      <tr>
+                       
+                          <td><img src="{% static 'images/car.jpg'%}" width="80"></td>
+                          
+                          <td>{{records.vehicle_name}}</td>
+                          <td>{{records.year}}</td>
+                          <td>{{records.vehicle_type}}</td>
+                          <td>{{records.vehicle_status}}</td>
+                          <td> <a href="{% url 'update_vehicle_details' records.id %}"><img src="{% static 'images/edit4.png'%}" width="30"></a></a>
+                           <a href="{% url 'delete_vehicle' records.id %}"><img src="{% static 'images/delete.png'%}" width="30"></a></td>
+                        
+                        </thead>
+                      <tbody>
+                      </tbody>
+                      {% endfor %}
+                  </table>
+              </div>
+          
+          </div>
+          </div>
+          </div>	
+          </div>	
+
+   <!--end of table section-->
+
+   
+
+   
+   
+<!--start of modal part-->
+<div class="container">
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Vehicle Details</h4>
+            
+          </div>
+          <div class="modal-body">
+            <form method='POST' action=''>{% csrf_token %}
+                {{form|crispy}}<br><!-- this form is imported from the views under add_customers function and it was initially creaate
+                in the forms.py file-->
+                <input type="submit" value='Save'/>
+            </form>
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!--end of modal part-->
+
+
+
+</body>
+</html>

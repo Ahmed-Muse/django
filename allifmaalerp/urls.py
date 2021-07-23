@@ -54,10 +54,11 @@ urlpatterns = [
      path('delete_vehicle/',include('allifmaalerpsystem.urls')),
      path('update_vehicle_details/',include('allifmaalerpsystem.urls')),
      #path('upload_file/',include('allifmaalerpsystem.urls')),
-     path('upload/',include('allifmaalerpsystem.urls')),#you can leave this out... try it.
+     
      path('upload_book/',include('allifmaalerpsystem.urls')),
      path('book_list/',include('allifmaalerpsystem.urls')),
      path('practice/',include('allifmaalerpsystem.urls')),
+     path('base1/',include('allifmaalerpsystem.urls')),
     
       
 ]

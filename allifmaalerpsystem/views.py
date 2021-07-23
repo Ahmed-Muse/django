@@ -415,11 +415,15 @@ def calc(request):
 
 def vehicles(request):
     header="Allifmaal Online Shop Management System"
-    query_table_content = AllifmaalVehiclesTable.objects.all()
-    form=AddVehicleDetailsForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-        messages.success(request, 'Vehicle added successfully')
+    query_table_content = AllifmaalVehiclesTable1.objects.all()
+    if request.method == 'POST':
+        form=AddVehicleDetailsForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Vehicle added successfully')
+            return redirect('vehicles')
+    else:
+        form=AddVehicleDetailsForm()
     
     context = {
 	"header": header,
@@ -432,7 +436,7 @@ def vehicles(request):
     return render(request,'vehicles.html',context)
 
 def delete_vehicle(request,pk):
-    query_table_content=AllifmaalVehiclesTable.objects.get(id=pk)
+    query_table_content=AllifmaalVehiclesTable1.objects.get(id=pk)
     if request.method =="POST":
         query_table_content.delete()
         messages.success(request,'Item deleted successfully')
@@ -441,7 +445,7 @@ def delete_vehicle(request,pk):
 
 
 def update_vehicle_details(request, pk):
-    query_table_content= AllifmaalVehiclesTable.objects.get(id=pk)
+    query_table_content= AllifmaalVehiclesTable1.objects.get(id=pk)
     form = VehicleDetailsUpdateForm(instance=query_table_content)#insert the content of the table stored in the selected id in the update form
     #we could have used the add customer form but the validation will refuse us to update since fields may exist
     if request.method == 'POST':
@@ -457,18 +461,6 @@ def update_vehicle_details(request, pk):
 
 
 
-def uploadfile(request):
-    context={}
-    if request.method == 'POST':
-        upload_file=request.FILES['document']# this name document is the name of the html input in the form there
-        file_stored=FileSystemStorage()
-        #file_stored.save(upload_file.name, upload_file)#saves to the directory
-        name=file_stored.save(upload_file.name, upload_file)
-        context['url']=file_stored.url(name)#this gives you url link of the file on the page.
-       
-        
-    return render(request, 'upload.html',context)
-
 
 
 def book_list(request):
@@ -478,19 +470,27 @@ def book_list(request):
     return render(request, 'book_list.html',{'books':books})
 
 def upload_book(request):
+    books=UploadFileTable1.objects.all()
     if request.method == 'POST':
         form=UploadBookForm(request.POST,request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('book_list')
+            return redirect('upload_book')
     else:
         form=UploadBookForm()
-    
+    context={"form":form,
+             "books":books}
         
-    return render(request, 'upload_book.html',{'form':form})
+    return render(request, 'upload_book.html',context)
 
 
 #for practice
 def practicepage(request):
   
     return render(request, 'practice.html')
+
+#for practice
+def base1(request):
+    title="base"
+  
+    return render(request, 'base1.html', {"title":title})
