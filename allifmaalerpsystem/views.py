@@ -488,3 +488,9 @@ def upload_book(request):
     
         
     return render(request, 'upload_book.html',{'form':form})
+
+
+#for practice
+def practicepage(request):
+  
+    return render(request, 'practice.html')

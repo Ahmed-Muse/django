@@ -20,7 +20,8 @@
         <li><a href="#contact">Contacts</a></li>
        
 
-        {% if request.user.is_authenticated %}  
+        {% if request.user.is_authenticated %} 
+        {% endif %} 
         <li class="nav-item"><a class="nav-link" href="/customers">Customers</a></li>
         <li class="nav-item"><a class="nav-link" href="stock">Stock</a></li>
         <li class="nav-item"><a class="nav-link" href="hrm">HRM</a></li>
@@ -30,6 +31,7 @@
         <li class="nav-item"><a class="nav-link" href="upload">Upload</a></li>
         <li class="nav-item"><a class="nav-link" href="book_list">book_list</a></li>
         <li class="nav-item"><a class="nav-link" href="upload_book">Upload book</a></li>
+        <li class="nav-item"><a class="nav-link" href="practice">Practice</a></li>
         
 
 
@@ -68,7 +70,7 @@
   </div>
 
 <!--end of modal content-->
-        {% endif %}
+        
         
 
 

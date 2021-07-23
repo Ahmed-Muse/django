@@ -105,7 +105,7 @@
                           <td>{{records.year}}</td>
                           <td>{{records.vehicle_type}}</td>
                           <td>{{records.vehicle_status}}</td>
-                          <td> <a href="{% url 'update_vehicle_details' records.id %}">Update</a>
+                          <td> <a href="{% url 'update_vehicle_details' records.id %}"><img src="{% static 'images/edit4.png'%}" width="30"></a></a>
                            <a href="{% url 'delete_vehicle' records.id %}"><img src="{% static 'images/delete.png'%}" width="30"></a></td>
                         
                         </thead>

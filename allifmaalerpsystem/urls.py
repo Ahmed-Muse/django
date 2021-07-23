@@ -43,6 +43,7 @@ urlpatterns = [
     path('upload/', views.uploadfile, name='upload'),
     path('book_list/', views.book_list, name='book_list'),
     path('upload_book/', views.upload_book, name='upload_book'),
+    path('practice/', views.practicepage, name='practice'),
     
     
     

@@ -57,6 +57,7 @@ urlpatterns = [
      path('upload/',include('allifmaalerpsystem.urls')),#you can leave this out... try it.
      path('upload_book/',include('allifmaalerpsystem.urls')),
      path('book_list/',include('allifmaalerpsystem.urls')),
+     path('practice/',include('allifmaalerpsystem.urls')),
     
       
 ]
