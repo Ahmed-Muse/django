@@ -5,38 +5,42 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from .forms import UploadFileForm
+import sys
+
+
+
 
 #for exporting data in CSV format
 from django.http import HttpResponse
 import csv
 from django.contrib.auth.decorators import login_required#required for login to work
 from django.core.files.storage import FileSystemStorage#for storing uploaded files
-# Create your views here.
+from .utils import get_plot#for ploting
+import numpy as np
+import matplotlib.pyplot as plt
+import json
 def index(request):
     title="Allifmaal System"
     query_table_content = AllifmaalCustomersTable.objects.all()#assign all the objects in the table to the variable
-    
+
     context = {
 	"title": title,
     "query_table_content":query_table_content
 	}#context contains the number of variables to be passed/called to the html templates/pages
     #so basically we are telling the views to pass whatever is contained in the context to the index.html page.
-    
-    
+
     return render(request,'index.html',context)
 #@login_required
 def customers(request):
     title="Allifmaal Customers"
     query_table_content = AllifmaalCustomersTable.objects.all()#assign all the objects in the table to the variable
-    
-    
-    
+
     context = {
 	"title": title,
     "query_table_content": query_table_content
 	}
-    
-    
+
+
     # start of the search form part.............................
     form = CustomerSearchForm(request.POST or None)#this is for the search
     if request.method == 'POST':
@@ -44,12 +48,12 @@ def customers(request):
 									project_name__icontains=form['project_name'].value())
     context = {#without context, you will not see the form in the page
 	    "form": form,
-	
+
 	    "query_table_content": query_table_content,
                 }
-    
+
     #end of search form pat.................................
-    
+
     return render(request,'customers.html',context)
 
 def add_customers(request):
@@ -62,9 +66,9 @@ def add_customers(request):
 	"title": "Add Customer",
  "form": form,
  "title":title,
-    
+
 	}
-    
+
     return render(request,'add_customers.html',context)
 
 
@@ -78,28 +82,28 @@ def add_stock(request):
     context = {
 	"title": "Add Stock",
  "form": form
-    
+
 	}
-    
+
     return render(request,'add_stock.html',context)
 
 #@login_required
 def stock(request):
     header="Allifmaal Stock Management System "
     query_table_content = AllifmaalStockTable.objects.all()#assign all the objects in the table to the variable
-    
+
     context = {
 	"header": header,
     "query_table_content": query_table_content
 	}
-    
+
     # start of the search form part.............................
     form = StockSearchForm(request.POST or None)#this is for the search
     if request.method == 'POST':
     	query_table_content = AllifmaalStockTable.objects.filter(part_number__icontains=form['part_number'].value(),
 									description__icontains=form['description'].value())
      #End of search
-     
+
      #start of section for exporting data in CSV format
     if form['csv'].value() == True:
             response = HttpResponse(content_type='text/csv')
@@ -110,18 +114,18 @@ def stock(request):
             for stock in instance:
                 writer.writerow([stock.part_number, stock.description,stock.quantity_in_store,stock.price,stock.comments])
             return response '''
-        
+
         ### end of section for exporting data in CSV format
-        
-        
+
+
     context = {#without context, you will not see the form in the page
 	    "form": form,
-	
+
 	    "query_table_content": query_table_content,
                 }
-    
+
     #end of search form pat.................................
-    
+
     return render(request,'stock.html',context)
 
 
@@ -133,20 +137,20 @@ def add_staff(request):
     context = {
 	"title": "Add Staff",
     "form": form
-    
+
 	}
-    
+
     return render(request,'add_staff.html',context)
 #@login_required
 def hrm(request):
     header="Allifmaal HRM Management System "
     query_table_content = AllifmaalHRMTable.objects.all()#assign all the objects in the table to the variable
-    
+
     context = {
 	"header": header,
     "query_table_content": query_table_content
 	}
-    
+
     # start of the search form part.............................
     form = StaffSearchForm(request.POST or None)#this is for the search
     if request.method == 'POST':
@@ -154,35 +158,32 @@ def hrm(request):
 									first_name__icontains=form['first_name'].value())
     context = {#without context, you will not see the form in the page
 	    "form": form,
-	
+
 	    "query_table_content": query_table_content,
                 }
     #end of search form pat.................................
-    
+
     return render(request,'hrm.html',context)
 
 
 #@login_required
 def dashboard(request):
     header="Allifmaal Sales Management System"
-    
+
     context = {
 	"header": header,
-    
+
 	}
-    
-    
+
     return render(request,'dashboard.html',context)
 #@login_required
 def eshop(request):
     header="Allifmaal Online Shop Management System"
-    
+
     context = {
 	"header": header,
-    
+
 	}
-    
-    
     return render(request,'eshop.html',context)
 
 
@@ -249,9 +250,8 @@ def delete_customer(request,pk):
         query_table_content.delete()
         messages.success(request,'Record deleted successfully')
         return redirect('/customers')
-    return render(request,'delete_customer.html')
-	#return render(request, 'delete_customer.html')
- 
+    return render(request,'delete_customer.html')	#return render(request, 'delete_customer.html')
+
 def delete_stock(request,pk):
     query_table_content=AllifmaalStockTable.objects.get(id=pk)
     if request.method =="POST":
@@ -275,7 +275,7 @@ def delete_staff(request,pk):
 def stock_details(request, pk):
     query_table_content = AllifmaalStockTable.objects.get(id=pk)
     context = {
-		
+
 		"query_table_content": query_table_content,
 	}
     return render(request, "stock_details.html", context)
@@ -291,12 +291,12 @@ def issue_items(request, pk):
         instance.receive_quantity=0
         instance.quantity_in_store -= instance.issue_quantity
         #instance.quantity=instance.quantity - instance.issue_quantity
-        
+
         #instance.issue_by = str(request.user)
         messages.success(request, "Issued SUCCESSFULLY. " + str(instance.quantity_in_store) + " " + str(instance.part_number) + "s now left in Store")
         instance.issue_by=str(request.user)
         instance.save()
-        
+
         return redirect('/stock_details/'+str(instance.id))
     context = {
 		"title": 'Issue ' + str(query_table_content.part_number),
@@ -347,11 +347,11 @@ def stock_history(request):
     header = 'LIST OF ITEMS'
     query_table_content = AllifmaalStockHistoryTable.objects.all()
     form=StockHistorySearchForm(request.POST or None)
-    
+
     if request.method == 'POST':
         query_table_content = AllifmaalStockHistoryTable.objects.filter(
 	    description__icontains=form['description'].value(),
-	   
+
 	)
     """ if request.method == 'POST':
         query_table_content = AllifmaalStockHistoryTable.objects.filter(
@@ -361,24 +361,20 @@ def stock_history(request):
 							form['end_date'].value()
 						]
 	) """
-     
-    
+
     context = {
 		"header": header,
 		"query_table_content": query_table_content,
         "form":form,
 	}
     return render(request, "stock_history.html",context)
-    
-    
-   
-    
+
 
 #delete records of history table
 def delete_history_record(request,pk):
     query_table_content=AllifmaalStockHistoryTable.objects.get(id=pk)
     if request.method =="POST":
-        
+
         query_table_content.delete()
         messages.success(request,'Item deleted successfully')
         return redirect('/stock')
@@ -400,17 +396,17 @@ def add_category(request):
     return render(request, "add_stock.html", context)
 
 
-#calculator page  
+#calculator page
 
 def calc(request):
     title="calculator"
-    
+
     context = {
-	
+
  "title":title,
-    
+
 	}
-    
+
     return render(request,'calc.html',context)
 
 def vehicles(request):
@@ -424,15 +420,13 @@ def vehicles(request):
             return redirect('vehicles')
     else:
         form=AddVehicleDetailsForm()
-    
+
     context = {
 	"header": header,
     "form":form,
     "query_table_content":query_table_content,
-    
+
 	}
-    
-    
     return render(request,'vehicles.html',context)
 
 def delete_vehicle(request,pk):
@@ -465,8 +459,7 @@ def update_vehicle_details(request, pk):
 
 def book_list(request):
     books=UploadFileTable1.objects.all()
-    
-        
+
     return render(request, 'book_list.html',{'books':books})
 
 def upload_book(request):
@@ -480,17 +473,76 @@ def upload_book(request):
         form=UploadBookForm()
     context={"form":form,
              "books":books}
-        
     return render(request, 'upload_book.html',context)
 
 
 #for practice
 def practicepage(request):
-  
+
     return render(request, 'practice.html')
 
 #for practice
 def base1(request):
     title="base"
-  
+
     return render(request, 'base1.html', {"title":title})
+
+#function for ploting for utils.py
+
+def main_view(request):
+    header="Allifmaal Stock Management System "
+    query_table_content = Sale.objects.all()#assign all the objects in the table to the variable
+    x=[x.item for x in query_table_content]
+
+    y=[y.price for y in query_table_content]
+
+    chart=get_plot(x,y)
+
+    context = {
+	"header": header,
+    "query_table_content": query_table_content,
+    "chart": chart,
+
+	}
+    return render(request, 'chart.html',context)
+
+
+def chartview(request):
+    title="Allifmaal Stock Management System "
+    query_table_content = AllifmaalStockTable.objects.all()#assign all the objects in the table to the variable
+    context = {#without context, you will not see the form in the page
+
+	    "query_table_content": query_table_content,
+     "title": title,
+    }
+    return render(request,'charts.html',context)
+
+def dashboard_inventory(request):
+    title="inventory dashboard"
+   
+
+    return render(request,'dashboard_inventory.html')
+
+def staff(request):
+    title="inventory dashboard"
+   
+
+    return render(request,'staff.html')
+def product(request):
+    title="inventory dashboard"
+   
+
+    return render(request,'product.html')
+def order(request):
+    title="inventory dashboard"
+   
+
+    return render(request,'order.html')
+
+def profile(request):
+    title="inventory dashboard"
+   
+
+    return render(request,'profile.html')
+
+

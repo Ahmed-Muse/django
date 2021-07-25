@@ -47,7 +47,7 @@ and is what is making font of the sidebar to be very small...try to get another 
                    
                       <td>
                         {% if records.vehicle_image %}
-                        <img src="{{records.vehicle_image.url}}" alt="{{book.title}}" style="width: 100px;">
+                        <a href="{{ records.vehicle_image.url }}" class="btn btn-primary btn-sm" target="_blank" > <img src="{{records.vehicle_image.url}}" alt="{{book.title}}" style="width: 100px;"></a>
                         {% else %}
                         <span class="text-muted">No cover</span>
                         {% endif %}
@@ -59,7 +59,9 @@ and is what is making font of the sidebar to be very small...try to get another 
                       <td>{{records.vehicle_type}}</td>
                       <td>{{records.vehicle_status}}</td>
                       <td> <a href="{% url 'update_vehicle_details' records.id %}"><img src="{% static 'images/edit4.png'%}" width="30"></a></a>
-                       <a href="{% url 'delete_vehicle' records.id %}"><img src="{% static 'images/delete.png'%}" width="30"></a></td>
+                       <a href="{% url 'delete_vehicle' records.id %}"><img src="{% static 'images/delete.png'%}" width="30"></a>
+                     
+                      </td>
                     
                     </thead>
                   <tbody>

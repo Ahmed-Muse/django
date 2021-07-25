@@ -19,6 +19,9 @@
     
     <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
 
+    <!--charts CDN-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.4.1/dist/chart.min.js"></script>
+
 </head>
 
 <body id="page-top">
@@ -152,15 +155,105 @@
                                         </a>
 
                                     </div>
-                                                                          
                                 </div>
-                                <h1>graphs to be shown here</h1>
+
+<!-- start of JS TEMPLATE TO PLOT BAR GRAPHS-->
+<div class="row">
+<div class="col-sm-6">
+<canvas id="myChart" width="10" height="10"></canvas>
+</div>
+<div class="col-sm-6">
+<canvas id="myChart2" width="10" height="10"></canvas>
+</div>
+</div>
+<script>
+var ctx = document.getElementById('myChart').getContext('2d');
+var ctx2 = document.getElementById('myChart2').getContext('2d');
+
+var myChart = new Chart(ctx, {
+    type: 'polarArea',
+    data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+            label: '# of Votes',
+            data: [9, 8, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 5
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+var ctx2 = document.getElementById('myChart2').getContext('2d');
+var myChart = new Chart(ctx2, {
+    type: 'bar',
+    data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+            label: '# of Votes',
+            data: [9, 8, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 5
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+
+
+
+</script>
+
+<!--END OF JS TEMPLATE TO PLOT BAR GRAPHS-->
+
+
+
+
+
                                 <!-- Card Body -->
-                                <div class="card-body">
-                                    <div class="chart-area">
-                                        <canvas id="myAreaChart"></canvas>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
 
@@ -175,13 +268,11 @@
                                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                        </a>
-                                       
+                                    </a>
                                     </div>
                                 </div>
-                                <h1>test</h1>
-                                <!-- Card Body -->
-                                <div class="card-body">
+                                
+                       <div class="card-body">
                                     <div class="chart-pie pt-4 pb-2">
                                         <canvas id="myPieChart"></canvas>
                                     </div>
@@ -201,7 +292,7 @@
                         </div>
                     </div>
 
-                   
+
                         </div>
                     </div>
 
@@ -210,8 +301,7 @@
 
                 <!--start of my additions-->
                 <div class="row">
-                    {% block content %}
-                    {% endblock %}
+
                 </div>
                 <!--end of my additions-->
 
@@ -239,11 +329,11 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-    
+
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
-    
+
 </body>
 
 </html>

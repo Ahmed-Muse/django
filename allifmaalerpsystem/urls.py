@@ -44,7 +44,14 @@ urlpatterns = [
     path('book_list/', views.book_list, name='book_list'),
     path('upload_book/', views.upload_book, name='upload_book'),
     path('practice/', views.practicepage, name='practice'),
-     path('base1/', views.base1, name='base'),
+    path('base1/', views.base1, name='base'),
+    path('main_view/', views.main_view, name='main_view'),
+    path('charts/', views.chartview, name='chartview'),
+    path('dashboard_inventory/', views.dashboard_inventory, name='dashboard_inventory'),
+    path('staff/', views.staff, name='staff'),
+    path('product/', views.product, name='product'),
+    path('order/', views.order, name='order'),
+    path('profile/', views.profile, name='profile'),
     
     
     

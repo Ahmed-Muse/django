@@ -25,3 +25,6 @@ class AddStockAdmin(admin.ModelAdmin):
 
 #register the customers model here
 admin.site.register(AllifmaalStockTable,AddStockAdmin)
+
+#to login is allifmaal and upto id
+admin.site.register(Sale)

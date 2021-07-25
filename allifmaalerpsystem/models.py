@@ -31,6 +31,9 @@ class AllifmaalStockTable(models.Model):
     created_by = models.CharField(max_length=50,blank=True,null=True)
     reorder_level = models.IntegerField(default='0',blank=True,null=True)
     
+    class meta:
+        verbose_name_plural ='Stock data in Allifmaal'#this is what will appear on the admin description
+    
     
 
     
@@ -136,5 +139,13 @@ class UploadFileTable1(models.Model):
     
     def __str__(self):
         	return self.title
+
+class Sale(models.Model):
+    item = models.CharField(max_length=50)
+    price = models.FloatField()
+    
+    def __str__(self):
+        	return (self.item)
+    
 
 

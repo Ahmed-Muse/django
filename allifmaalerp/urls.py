@@ -59,6 +59,12 @@ urlpatterns = [
      path('book_list/',include('allifmaalerpsystem.urls')),
      path('practice/',include('allifmaalerpsystem.urls')),
      path('base1/',include('allifmaalerpsystem.urls')),
+     path('charts/',include('allifmaalerpsystem.urls')),
+     path('dashboard_inventory/',include('allifmaalerpsystem.urls')),
+     path('staff/',include('allifmaalerpsystem.urls')),
+     path('product/',include('allifmaalerpsystem.urls')),
+     path('order/',include('allifmaalerpsystem.urls')),
+     path('profile/',include('allifmaalerpsystem.urls')),
     
       
 ]
