@@ -156,3 +156,11 @@ LOGIN_REDIRECT_URL='/'#once you login, you will be redirected to the home page..
 #PATH WHERE UPLOADED FILES WILL BE STORED...in the media folder
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 MEDIA_URL='/media/'#fetch images/media using this path when viewing through the browser
+
+
+#bellow is for sending email
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_PORT='587'
+EMAIL_HOST_USER='axmedmusadir@gmail.com'
+EMAIL_HOST_PASSWORD='amd123100%'
+EMAIL_USE_TLS=True

@@ -65,6 +65,7 @@ urlpatterns = [
      path('product/',include('allifmaalerpsystem.urls')),
      path('order/',include('allifmaalerpsystem.urls')),
      path('profile/',include('allifmaalerpsystem.urls')),
+     path('contact/',include('allifmaalerpsystem.urls')),
     
       
 ]

@@ -6,6 +6,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from .forms import UploadFileForm
 import sys
+from django.core.mail import send_mail#this is for sending email from contact form
 
 
 
@@ -544,5 +545,32 @@ def profile(request):
    
 
     return render(request,'profile.html')
+
+#below is for contact page
+def contact(request):
+    title="contact page"
+    
+    #the form below is normal html form and not django form
+    if request.method == 'POST':
+        firstname=request.POST['firstname']
+        lastname=request.POST['lastname']
+        country=request.POST['country']
+        subject=request.POST['subject']
+        
+        context={
+        "firstname":firstname,
+        "lastname":lastname,
+        "country":country,
+        "subject":subject
+    }
+        
+        return render(request,'contact.html',context)
+    else:
+        context ={
+        "title":title,
+    }
+   
+
+        return render(request,'contact.html',context)
 
 
