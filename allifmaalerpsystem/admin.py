@@ -24,7 +24,7 @@ class AddStockAdmin(admin.ModelAdmin):
     search_fields = ['part_number', 'description']#this is the search fields....you can not give this another name
 
 #register the customers model here
-admin.site.register(AllifmaalStockTable,AddStockAdmin)
+admin.site.register(AllifmaalStockTable1,AddStockAdmin)
 
 #to login is allifmaal and upto id
 admin.site.register(Sale)

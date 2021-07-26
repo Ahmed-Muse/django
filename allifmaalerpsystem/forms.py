@@ -1,4 +1,5 @@
-from django import forms#we import this so that we use the inbuilt forms module of django
+from django import forms
+from django.forms import widgets#we import this so that we use the inbuilt forms module of django
 from .models import *
 
 ############### START OF CUSTOMERS#######################
@@ -17,9 +18,20 @@ class CustomerSearchForm(forms.ModelForm):
             
 class AddStockForm(forms.ModelForm): #the forms here is the one imported up there.
     class Meta:
-        model = AllifmaalStockTable
-        text_fields = ['part_number', 'description', 'quantity_in_store','price','comments']
-        fields='__all__'# this was used because of an error when running and the error said " .ImproperlyConfigured: Creating a ModelForm without either the 'fields' attribute or the 'exclude' attribute is prohibited; form CustomerCreateForm needs updating.
+        model = AllifmaalStockTable1
+        fields = ['part_number', 'description', 'quantity_in_store','price','comments']
+        
+        widgets={
+            'part_number':forms.TextInput(attrs={'class':'form-control','placeholder':'part number','background-color':'red'}),
+            'description':forms.TextInput(attrs={'class':'form-control','placeholder':'item description'}),
+            'quantity_in_store':forms.NumberInput(attrs={'class':'form-control','placeholder':'Quantity'}),
+            'price':forms.TextInput(attrs={'class':'form-control','placeholder':'price'}),
+            'comments':forms.TextInput(attrs={'class':'form-control','placeholder':'comments'}),
+            #form-control here is the css class that we are passing
+        }
+        #'comments':forms.Textarea(attrs={'class':'form-control'}),
+        
+        #fields='__all__'# this was used because of an error when running and the error said " .ImproperlyConfigured: Creating a ModelForm without either the 'fields' attribute or the 'exclude' attribute is prohibited; form CustomerCreateForm needs updating.
 
 
     #start of customized form validation functions..............................
@@ -30,7 +42,7 @@ class AddStockForm(forms.ModelForm): #the forms here is the one imported up ther
             raise forms.ValidationError('This field is required')
         
         #start of section to avoid duplications
-        for instance in AllifmaalStockTable.objects.all():
+        for instance in AllifmaalStockTable1.objects.all():
             if instance.part_number==part_number:
                 raise forms.ValidationError(" The part number "+ part_number +' already exists in the system')
         # end of section to avoid duplications
@@ -44,7 +56,7 @@ class AddStockForm(forms.ModelForm): #the forms here is the one imported up ther
 class StockSearchForm(forms.ModelForm):
     csv = forms.BooleanField(required=False)# This is for exporting to data in CSV format
     class Meta:
-        model = AllifmaalStockTable
+        model = AllifmaalStockTable1
         fields = ['part_number','description']
     
 class AddStaffForm(forms.ModelForm): #the forms here is the one imported up there.
@@ -89,7 +101,7 @@ class CustomerUpdateForm(forms.ModelForm):
 #stock update form
 class StockUpdateForm(forms.ModelForm):
     class Meta:
-        model = AllifmaalStockTable
+        model = AllifmaalStockTable1
     
         fields = ['part_number', 'description', 'quantity_in_store','price','comments']
         fields='__all__'   
@@ -106,20 +118,20 @@ class StaffUpdateForm(forms.ModelForm):
 #forms to receive and issue requests
 class IssueItemForm(forms.ModelForm):
     	class Meta:
-            model = AllifmaalStockTable
+            model = AllifmaalStockTable1
             fields = ['issue_quantity', 'issue_to']
 
 
 class ReceiveItemForm(forms.ModelForm):
 	class Meta:
-		model = AllifmaalStockTable
+		model = AllifmaalStockTable1
 		fields = ['receive_quantity']
 
 
 #reorder level form
 class StockReorderLevelForm(forms.ModelForm):
     class Meta:
-        model=AllifmaalStockTable
+        model=AllifmaalStockTable1
         fields =['reorder_level']
         
 #Form for stock history StaffSearchForm

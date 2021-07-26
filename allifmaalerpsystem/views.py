@@ -91,7 +91,7 @@ def add_stock(request):
 #@login_required
 def stock(request):
     header="Allifmaal Stock Management System "
-    query_table_content = AllifmaalStockTable.objects.all()#assign all the objects in the table to the variable
+    query_table_content = AllifmaalStockTable1.objects.all()#assign all the objects in the table to the variable
 
     context = {
 	"header": header,
@@ -101,7 +101,7 @@ def stock(request):
     # start of the search form part.............................
     form = StockSearchForm(request.POST or None)#this is for the search
     if request.method == 'POST':
-    	query_table_content = AllifmaalStockTable.objects.filter(part_number__icontains=form['part_number'].value(),
+    	query_table_content = AllifmaalStockTable1.objects.filter(part_number__icontains=form['part_number'].value(),
 									description__icontains=form['description'].value())
      #End of search
 
@@ -208,7 +208,7 @@ def update_customers(request, pk):
 ''' path('update_items/<str:pk>/', views.update_items, name="update_items"), '''
 
 def update_stock(request, pk):
-    query_table_content= AllifmaalStockTable.objects.get(id=pk)
+    query_table_content= AllifmaalStockTable1.objects.get(id=pk)
     form = StockUpdateForm(instance=query_table_content)#insert the content of the table stored in the selected id in the update form
     #we could have used the add customer form but the validation will refuse us to update since fields may exist
     if request.method == 'POST':
@@ -254,7 +254,7 @@ def delete_customer(request,pk):
     return render(request,'delete_customer.html')	#return render(request, 'delete_customer.html')
 
 def delete_stock(request,pk):
-    query_table_content=AllifmaalStockTable.objects.get(id=pk)
+    query_table_content=AllifmaalStockTable1.objects.get(id=pk)
     if request.method =="POST":
         query_table_content.delete()
         messages.success(request,'Item deleted successfully')
@@ -274,7 +274,7 @@ def delete_staff(request,pk):
 
 
 def stock_details(request, pk):
-    query_table_content = AllifmaalStockTable.objects.get(id=pk)
+    query_table_content = AllifmaalStockTable1.objects.get(id=pk)
     context = {
 
 		"query_table_content": query_table_content,
@@ -285,7 +285,7 @@ def stock_details(request, pk):
 #ISSUE AND RECEIVE SECTIONS
 
 def issue_items(request, pk):
-    query_table_content = AllifmaalStockTable.objects.get(id=pk)
+    query_table_content = AllifmaalStockTable1.objects.get(id=pk)
     form = IssueItemForm(request.POST or None, instance=query_table_content)
     if form.is_valid():
         instance = form.save(commit=False)
@@ -309,7 +309,7 @@ def issue_items(request, pk):
 
 #receive sections
 def receive_items(request, pk):
-    query_table_content = AllifmaalStockTable.objects.get(id=pk)
+    query_table_content = AllifmaalStockTable1.objects.get(id=pk)
     form = ReceiveItemForm(request.POST or None, instance=query_table_content)
     if form.is_valid():
         instance = form.save(commit=False)
@@ -329,7 +329,7 @@ def receive_items(request, pk):
 
 #reorder level view
 def reorder_level(request,pk):
-    query_table_content =AllifmaalStockTable.objects.get(id=pk)
+    query_table_content =AllifmaalStockTable1.objects.get(id=pk)
     form=StockReorderLevelForm(request.POST or None,instance=query_table_content)
     if form.is_valid():
         instance=form.save(commit=False)
@@ -510,7 +510,7 @@ def main_view(request):
 
 def chartview(request):
     title="Allifmaal Stock Management System "
-    query_table_content = AllifmaalStockTable.objects.all()#assign all the objects in the table to the variable
+    query_table_content = AllifmaalStockTable1.objects.all()#assign all the objects in the table to the variable
     context = {#without context, you will not see the form in the page
 
 	    "query_table_content": query_table_content,
