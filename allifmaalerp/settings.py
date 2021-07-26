@@ -135,7 +135,11 @@ STATICFILES_LOCATION='static'
 
 STATIC_URL = '/static/'
 STATIC_ROOT='static'
-STATICFILES_DIRS =[os.path.join(BASE_DIR,'allifmaalerpsystem/static')]
+
+#then create the directory below that holds all of the static files
+STATICFILES_DIRS =[
+    os.path.join(BASE_DIR,'allifmaalerpsystem/static')
+    ]
 STATIC_ROOT = os.path.join(BASE_DIR,'static')#THIS IS FOR PRODUCTION
 
 # Default primary key field type
