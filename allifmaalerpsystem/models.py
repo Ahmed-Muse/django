@@ -18,8 +18,8 @@ class AllifmaalCustomersTable(models.Model):
 class AllifmaalStockTable1(models.Model):
     part_number = models.CharField(max_length=255, blank=True, null=True)# unique prevents data duplication
     description = models.CharField(max_length=255, blank=True, null=True)
-    quantity_in_store = models.IntegerField(default='0',blank=True,null=True)
-    price = models.IntegerField(max_length=255, blank=True, null=True)
+    quantity_in_store = models.IntegerField(blank=True,null=True)
+    price = models.IntegerField(blank=True, null=True)
     comments = models.CharField(max_length=255, blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)#if adding now, pick currrent data and if updating stick to the original date
     last_updated = models.DateTimeField(auto_now_add=False, auto_now=True)

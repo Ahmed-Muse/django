@@ -53,6 +53,7 @@ urlpatterns = [
     path('order/', views.order, name='order'),
     path('profile/', views.profile, name='profile'),
     path('contact/', views.contact, name='contact'),
+     path('trips/', views.trips, name='trips'),
     
     
     

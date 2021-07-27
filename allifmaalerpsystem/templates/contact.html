@@ -53,6 +53,7 @@ input[type=submit]:hover {
 {% endif %}
 
 <div class="container">
+  <div class="col-sm-5">
   <form action="{% url 'contact' %}" method="POST"><!--here it is used "contact" because on the urls.py, that is the name used-->
     {% csrf_token %}
     <label for="fname">First Name</label>
@@ -73,6 +74,7 @@ input[type=submit]:hover {
 
     <input type="submit" value="Submit">
   </form>
+  </div>
 </div>
 
 </body>

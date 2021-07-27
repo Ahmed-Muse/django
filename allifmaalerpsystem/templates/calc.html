@@ -3,30 +3,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>{{title}}</title>
-    <script src="static/js/scripts.js" defer></script>
-    {% block scripts %}
-    <script src="{% static 'js/scripts.js' %}" defer></script>
-    {% endblock scripts %}
+	
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Calculator</title>
+   
     
 </head>
 <body>
     <link href="{% static 'css/stylecalc.css' %}" rel="stylesheet">
-    <script src="{% static 'js/scripts.js' %}"></script>
-    <script src="static/js/scripts.js" defer></script>
+    <link href="{% static 'css/stylescalc2.css' %}" rel="stylesheet">
+    
+    
     
     <li><a href="/">Website</a></li> 
     
     <hr><br>
     
 	<h1>Welcome to the calculator page</h1>
+    <p id="demo">A Paragraph.</p>
+    
+    <button type="button" onclick="myFunction()">change pragraph</button>
     <h1 id="myH"></h1>
     
     <!--put everything in grid-->
     <div class="calculator-grid">
         <div class="outputscreen">
-            <div data-previous-number class="previous-number"></div>
-                <div data-current-number class="current-number"></div>
+            <div data-previous-number class="previous-number">
+                <!--this is space for previous number-->
+                </div>
+                <div data-current-number class="current-number">
+                   <!--this is space for current number-->
+                </div>
         </div>
 
         <button data-all-clear class="span-two">AC</button>
@@ -53,12 +62,65 @@
 
     </div>
 
-   {% if chart %}
-   {{ chart|safe }}
-   <img src="data:image/png;base64, {{chart|safe}}">
-   
-   test
   
-   {% endif %}
+   {% block script %}
+   
+   
+   
+  
+  
+
+   
+    {% endblock %}
+    </head>
+    <body>
+    
+    <h2>JavaScript in Head</h2>
+    
+    <div id="imagediv" style="display:none">
+        <button>AF<i class="material-icons" id="imagedivback">clear</i></button>
+          <embed src="" style="width:100%;height:auto;min-height:400px"  id="img01">AFFA</embed> 
+          
+        </div>		
+
+        <!--start of calc2-->
+        <table class="calculator">
+            <tr>
+                <td colspan="3"><input class="display-box" type="text" id="result" disabled /></td>
+                <!-- clearScreen() function clear all the values  -->
+                <td><input class="button" type="button" value="C" onclick="clearScreen()" style="background-color: #fb0066;" /> </td>
+            </tr>
+            <tr>
+                <!-- display() function display the value of clicked button -->
+                <td><input class="button" type="button" value="1" onclick="display('1')" /> </td>
+                <td><input class="button" type="button" value="2" onclick="display('2')" /> </td>
+                <td><input class="button" type="button" value="3" onclick="display('3')" /> </td>
+                <td><input class="button" type="button" value="/" onclick="display('/')" /> </td>
+            </tr>
+            <tr>
+                <td><input class="button" type="button" value="4" onclick="display('4')" /> </td>
+                <td><input class="button" type="button" value="5" onclick="display('5')" /> </td>
+                <td><input class="button" type="button" value="6" onclick="display('6')" /> </td>
+                <td><input class="button" type="button" value="-" onclick="display('-')" /> </td>
+            </tr>
+            <tr>
+                <td><input class="button" type="button" value="7" onclick="display('7')" /> </td>
+                <td><input class="button" type="button" value="8" onclick="display('8')" /> </td>
+                <td><input class="button" type="button" value="9" onclick="display('9')" /> </td>
+                <td><input class="button" type="button" value="+" onclick="display('+')" /> </td>
+            </tr>
+            <tr>
+                <td><input class="button" type="button" value="." onclick="display('.')" /> </td>
+                <td><input class="button" type="button" value="0" onclick="display('0')" /> </td>
+                <!-- calculate() function evaluate the mathematical expression -->
+                <td><input class="button" type="button" value="=" onclick="calculate()" style="background-color: #fb0066;" /> </td>
+                <td><input class="button" type="button" value="*" onclick="display('*')" /> </td>
+            </tr>
+        </table>
+        <!--end of calc2-->
+    
+        <script src="{% static 'js/scriptcalc2.js' %}"></script>
 </body>
+<script src="{% static 'js/scripts.js' %}"></script> <!--this link works only here, outside body-->
+<script src="{% static 'js/scriptcalc2.js' %}"></script>
 </html>

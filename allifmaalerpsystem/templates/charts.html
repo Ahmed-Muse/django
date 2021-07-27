@@ -21,7 +21,7 @@
     data: {
     labels: [{% for items in query_table_content %} '{{items.description}}', {% endfor %}],
         datasets: [{
-            label: '# of Votes',
+            label: 'AMD Stock',
             data: [{% for items in query_table_content %} {{items.quantity_in_store}}, {% endfor %}],
             backgroundColor: [
                 'rgba(255, 99, 132, 1)',

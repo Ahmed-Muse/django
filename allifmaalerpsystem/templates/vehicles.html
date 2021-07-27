@@ -13,6 +13,17 @@ and is what is making font of the sidebar to be very small...try to get another 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+
+
+
+
+
+ <!-- Bootstrap core CSS -->
+
+ 
+
+
+
   <!--end for the modal part-->
 
 
@@ -92,12 +103,16 @@ and is what is making font of the sidebar to be very small...try to get another 
         <div class="modal-body">
 
 
-
+          
           <form method="post" enctype="multipart/form-data">
+            <div class="form-group">
+              <div class="col-sm-4">
             {% csrf_token %}
-              {{form.as_p}}
+              {{form|crispy}}
               <button type="submit" class="btn btn-success">Save</button>
+              </div></div>
           </form>
+         
 
 
          

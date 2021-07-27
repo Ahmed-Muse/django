@@ -8,8 +8,9 @@ class Calculator{
 
     //create the calculator Functions
     clear(){
-        this.previous-number ==''
+        
         this.current-number ==''
+        this.previous-number ==''
         this.operation=undefined
 
     }
@@ -47,4 +48,9 @@ numberButtons.forEach(button => {
         calculator.updateDisplay()
     })
 })
-document.getElementById("myH").innerHTML = "JavaScript calculator";
+
+
+// below is for testing only
+function myFunction() {
+    document.getElementById("demo").innerHTML = "Paragraph changed.";
+  }

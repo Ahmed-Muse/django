@@ -574,3 +574,8 @@ def contact(request):
         return render(request,'contact.html',context)
 
 
+def trips(request):
+    title="inventory dashboard"
+   
+
+    return render(request,'trips.html')

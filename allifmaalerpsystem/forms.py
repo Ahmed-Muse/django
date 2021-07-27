@@ -25,7 +25,7 @@ class AddStockForm(forms.ModelForm): #the forms here is the one imported up ther
             'part_number':forms.TextInput(attrs={'class':'form-control','placeholder':'part number','background-color':'red'}),
             'description':forms.TextInput(attrs={'class':'form-control','placeholder':'item description'}),
             'quantity_in_store':forms.NumberInput(attrs={'class':'form-control','placeholder':'Quantity'}),
-            'price':forms.TextInput(attrs={'class':'form-control','placeholder':'price'}),
+            'price':forms.NumberInput(attrs={'class':'form-control','placeholder':'price'}),
             'comments':forms.TextInput(attrs={'class':'form-control','placeholder':'comments'}),
             #form-control here is the css class that we are passing
         }
@@ -164,7 +164,21 @@ class VehicleDetailsUpdateForm(forms.ModelForm):
         model = AllifmaalVehiclesTable1
         fields = ['vehicle_image','vehicle_name', 'vehicle_make', 'vehicle_model',
                        'year','license','vin','starting_odometer','primary_meter','vehicle_type','vehicle_status']
-        fields='__all__'
+        widgets={
+            'vehicle_name':forms.TextInput(attrs={'class':'form-control','placeholder':'vehicle name'}),
+            'vehicle_make':forms.TextInput(attrs={'class':'form-control','placeholder':'vehicle make'}),
+            'vehicle_model':forms.TextInput(attrs={'class':'form-control','placeholder':'vehicle model'}),
+            'year':forms.TextInput(attrs={'class':'form-control','placeholder':'year'}),
+            'license':forms.TextInput(attrs={'class':'form-control','placeholder':'license'}),
+            'vin':forms.TextInput(attrs={'class':'form-control','placeholder':'vin'}),
+            'year':forms.TextInput(attrs={'class':'form-control','placeholder':'year'}),
+            'starting_odometer':forms.NumberInput(attrs={'class':'form-control','placeholder':'starting odometer'}),
+            'primary_meter':forms.TextInput(attrs={'class':'form-control','placeholder':'primary meter'}),
+            'vehicle_type':forms.TextInput(attrs={'class':'form-control','placeholder':'vehicle_type'}),
+            'vehicle_status':forms.TextInput(attrs={'class':'form-control','placeholder':'vehicle_status'}),
+            #form-control here is the css class that we are passing
+        }
+        #fields='__all__'
 
 #form to upload files
 class UploadFileForm(forms.Form):
