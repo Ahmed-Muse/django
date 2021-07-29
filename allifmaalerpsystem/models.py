@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime, date
 
 # Create your models here.
 
@@ -46,7 +47,7 @@ gender_choice = (
 		('Male', 'Male'),
 		('Female', 'Female'),
 	)
-class AllifmaalHRMTable(models.Model):
+class AllifmaalHRMTable2(models.Model):
     staff_number = models.CharField(max_length=255, blank=True, null=True)
     first_name = models.CharField(max_length=255, blank=True, null=True)
     middle_name = models.CharField(max_length=255, blank=True, null=True)
@@ -54,7 +55,9 @@ class AllifmaalHRMTable(models.Model):
     gender = models.CharField(max_length=255, blank=True, null=True,choices=gender_choice)
     title = models.CharField(max_length=255, blank=True, null=True)
     department = models.CharField(max_length=255, blank=True, null=True)
-    joined = models.CharField(max_length=255, blank=True, null=True)
+    #joined = models.DateTimeField(auto_now_add=True, auto_now=False, blank=True, null=True)#will add automatically and field
+    #will disappear
+    joined = models.DateTimeField(auto_now_add=False, auto_now=False, blank=True, null=True)
     
     
     def __str__(self):

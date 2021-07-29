@@ -63,6 +63,7 @@ def add_customers(request):
     if form.is_valid():
         form.save()
         messages.success(request, 'Customer added successfully')
+        return redirect('/customers')
     context = {
 	"title": "Add Customer",
  "form": form,
@@ -145,7 +146,7 @@ def add_staff(request):
 #@login_required
 def hrm(request):
     header="Allifmaal HRM Management System "
-    query_table_content = AllifmaalHRMTable.objects.all()#assign all the objects in the table to the variable
+    query_table_content = AllifmaalHRMTable2.objects.all()#assign all the objects in the table to the variable
 
     context = {
 	"header": header,
@@ -155,7 +156,7 @@ def hrm(request):
     # start of the search form part.............................
     form = StaffSearchForm(request.POST or None)#this is for the search
     if request.method == 'POST':
-    	query_table_content = AllifmaalHRMTable.objects.filter(staff_number__icontains=form['staff_number'].value(),
+    	query_table_content = AllifmaalHRMTable2.objects.filter(staff_number__icontains=form['staff_number'].value(),
 									first_name__icontains=form['first_name'].value())
     context = {#without context, you will not see the form in the page
 	    "form": form,
@@ -165,6 +166,22 @@ def hrm(request):
     #end of search form pat.................................
 
     return render(request,'hrm.html',context)
+
+#bellow givbes full details of the staff section
+def hrm_full_details(request,pk):
+    header="Allifmaal HRM Management System "
+    query_table_content = AllifmaalHRMTable2.objects.get(id=pk)
+    if request.method == 'POST':
+        query_table_content = AllifmaalHRMTable2.objects.all()
+        
+        
+        messages.success(request, 'Customer updated successfully')
+        return redirect('/hrm_full_details')
+    context = {
+        "header":header,
+        "query_table_content":query_table_content,
+    }
+    return render(request,'hrm_full_details.html',context)
 
 
 #@login_required
@@ -226,7 +243,7 @@ def update_stock(request, pk):
 ''' path('update_items/<str:pk>/', views.update_items, name="update_items"), '''
 
 def update_staff(request, pk):
-    query_table_content= AllifmaalHRMTable.objects.get(id=pk)
+    query_table_content= AllifmaalHRMTable2.objects.get(id=pk)
     form = StaffUpdateForm(instance=query_table_content)#insert the content of the table stored in the selected id in the update form
     #we could have used the add customer form but the validation will refuse us to update since fields may exist
     if request.method == 'POST':
@@ -263,7 +280,7 @@ def delete_stock(request,pk):
 
 
 def delete_staff(request,pk):
-    query_table_content=AllifmaalHRMTable.objects.get(id=pk)
+    query_table_content=AllifmaalHRMTable2.objects.get(id=pk)
     if request.method =="POST":
         query_table_content.delete()
         messages.success(request,'Staff record deleted successfully')
@@ -479,8 +496,14 @@ def upload_book(request):
 
 #for practice
 def practicepage(request):
+    form=StockHistorySearchForm()
+    
+    context={
+        "form":form,
+        
+             }
 
-    return render(request, 'practice.html')
+    return render(request, 'practice.html',context)
 
 #for practice
 def base1(request):
@@ -579,3 +602,44 @@ def trips(request):
    
 
     return render(request,'trips.html')
+
+def dailytimesheet(request):
+    title="inventory dashboard"
+   
+
+    return render(request,'dailytimesheet.html')  
+def dailymileage(request):
+    title="inventory dashboard"
+   
+
+    return render(request,'dailymileage.html')
+def fillups(request):
+    title="inventory dashboard"
+   
+
+    return render(request,'fillups.html')
+def services(request):
+    title="inventory dashboard"
+   
+
+    return render(request,'services.html')
+def expenses(request):
+    title="inventory dashboard"
+   
+
+    return render(request,'expenses.html')
+def reminders(request):
+    title="inventory dashboard"
+   
+
+    return render(request,'reminders.html')
+def userslist(request):
+    title="inventory dashboard"
+   
+
+    return render(request,'userslist.html')
+def login(request):
+    title="inventory dashboard"
+   
+
+    return render(request,'login.html')

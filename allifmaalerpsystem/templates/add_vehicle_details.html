@@ -4,12 +4,18 @@
 <html>
 <head>
 	<title>{{title}}</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"><!--opens modals
+and is what is making font of the sidebar to be very small...try to get another link that opens the modal-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     
 </head>
 <body>
     <link href="{% static 'css/style2.css' %}" rel="stylesheet">
     <li><a href="/">Website</a></li> 
-    <li><a href="/hrm">HRM</a></li>
+    <li><a href="/vehicles">Vehicles</a></li>
     <hr><br>
 
 
@@ -24,13 +30,15 @@
 <!-- of customer added succesfully messge-->
 
 
-
+<div class="form-group">
+    <div class="col-sm-2">
 
 	<form method='POST' action=''>{% csrf_token %}
 		{{form|crispy}}<br><!-- this form is imported from the views under add_customers function and it was initially creaate
         in the forms.py file-->
         <input type="submit" value='Save'/>
     </form>
+    </div></div>
 
 </body>
 </html>

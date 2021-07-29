@@ -53,11 +53,24 @@ urlpatterns = [
     path('order/', views.order, name='order'),
     path('profile/', views.profile, name='profile'),
     path('contact/', views.contact, name='contact'),
-     path('trips/', views.trips, name='trips'),
+    path('trips/', views.trips, name='trips'),
+    
+    path('dailytimesheet/', views.dailytimesheet, name='dailytimesheet'),
+    path('dailymileage/', views.dailymileage, name='dailymileage'),
+    path('fillups/', views.fillups, name='fillups'),
+    path('services/', views.services, name='services'),
+    path('expenses/', views.expenses, name='expenses'),
+    path('reminders/', views.reminders, name='reminders'),
+    path('userslist/', views.userslist, name='userslist'),
+    path('login/', views.login, name='login'),
+    path('hrm_full_details/', views.hrm_full_details, name='hrm_full_details'),
+    path('hrm_full_details/<str:pk>/', views.hrm_full_details, name="hrm_full_details"),
+    
     
     
     
 
+   
 ] 
 if settings.DEBUG:#if debug which is in development stage only, then add the path below
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)#this will enable django to display the uploaded files

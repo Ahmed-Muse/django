@@ -1,14 +1,7 @@
 $(document).ready(function(){
-  $('.table').paging({limit:6});
   
-    $(".datetimeinput").datepicker({changeYear: true,changeMonth: true, dateFormat: 'yy-mm-dd'});
+    $(".datetimeinput").datepicker({changeYear: false,changeMonth: true, dateFormat: 'yy-mm-dd'});
    
-   
-
-
-
-
-
 
     
   });

@@ -120,10 +120,12 @@
                         
                         <th>Price</th>
                         <th>Reorder</th>
+                        <th>timestamp</th>
                         
                        
                         
                         <th>Comments</th>
+                        <th>last update</th>
                         <th>Update</th>
     
                         <th>Delete</th>
@@ -161,9 +163,11 @@
 
                 <td>{{records.price}}</td>
                 <td><a href="{% url 'reorder_level' records.id %}">{{records.reorder_level}}</a></td>
+                <td>{{records.timestamp}}</td>
                 
                 
                 <td>{{records.comments}}</td>
+                <td>{{records.last_updated}}</td>
                 <td> <a href="{% url 'update_stock' records.id %}">Update</a></td>
                 <td> <a href="{% url 'delete_stock' records.id %}"><img src="{% static 'images/delete.png'%}" width="30"></a></td>
                 

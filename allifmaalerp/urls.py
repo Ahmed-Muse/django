@@ -66,6 +66,14 @@ urlpatterns = [
      path('order/',include('allifmaalerpsystem.urls')),
      path('profile/',include('allifmaalerpsystem.urls')),
      path('contact/',include('allifmaalerpsystem.urls')),
+     
+     path('dailytimesheet/',include('allifmaalerpsystem.urls')),
+     path('dailymileage/',include('allifmaalerpsystem.urls')),
+     path('fillups/',include('allifmaalerpsystem.urls')),
+     path('services/',include('allifmaalerpsystem.urls')),
+     path('expenses/',include('allifmaalerpsystem.urls')),
+     path('reminders/',include('allifmaalerpsystem.urls')),
+     
     
       
 ]

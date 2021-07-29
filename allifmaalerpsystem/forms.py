@@ -25,7 +25,7 @@ class AddStockForm(forms.ModelForm): #the forms here is the one imported up ther
             'part_number':forms.TextInput(attrs={'class':'form-control','placeholder':'part number','background-color':'red'}),
             'description':forms.TextInput(attrs={'class':'form-control','placeholder':'item description'}),
             'quantity_in_store':forms.NumberInput(attrs={'class':'form-control','placeholder':'Quantity'}),
-            'price':forms.NumberInput(attrs={'class':'form-control','placeholder':'price'}),
+            'price':forms.TextInput(attrs={'class':'form-control','placeholder':'price'}),
             'comments':forms.TextInput(attrs={'class':'form-control','placeholder':'comments'}),
             #form-control here is the css class that we are passing
         }
@@ -61,7 +61,7 @@ class StockSearchForm(forms.ModelForm):
     
 class AddStaffForm(forms.ModelForm): #the forms here is the one imported up there.
     class Meta:
-        model = AllifmaalHRMTable
+        model = AllifmaalHRMTable2
         text_fields = ['staff_number', 'first_name', 'middle_name','last_name','gender','title','department','joined']
         fields='__all__'# this was used because of an error when running and the error said " .
         
@@ -73,7 +73,7 @@ class AddStaffForm(forms.ModelForm): #the forms here is the one imported up ther
             raise forms.ValidationError('This field is required')
         
         #start of section to avoid duplications
-        for instance in AllifmaalHRMTable.objects.all():
+        for instance in AllifmaalHRMTable2.objects.all():
             if instance.staff_number==staff_number:
                 raise forms.ValidationError(" The staff number "+ staff_number +' already exists in the system')
         # end of section to avoid duplications
@@ -85,7 +85,7 @@ class AddStaffForm(forms.ModelForm): #the forms here is the one imported up ther
 
 class StaffSearchForm(forms.ModelForm):
     class Meta:
-        model = AllifmaalHRMTable
+        model = AllifmaalHRMTable2
         fields = ['staff_number','first_name']
 
 
@@ -109,7 +109,7 @@ class StockUpdateForm(forms.ModelForm):
 #staff update form		
 class StaffUpdateForm(forms.ModelForm):
     class Meta:
-        model = AllifmaalHRMTable
+        model = AllifmaalHRMTable2
     
         fields = ['staff_number', 'first_name', 'middle_name','last_name','gender','title','department','joined']
         fields='__all__'
@@ -154,32 +154,30 @@ class CategoryCreateForm(forms.ModelForm):
 class AddVehicleDetailsForm(forms.ModelForm): #the forms here is the one imported up there.
     class Meta:
         model = AllifmaalVehiclesTable1
-        text_fields = ['vehicle_image','vehicle_name', 'vehicle_make', 'vehicle_model',
-                       'year','license','vin','starting_odometer','primary_meter','vehicle_type','vehicle_status']
-        fields='__all__'# this was used because of an error when running and the error said " .
+        #fields = ['vehicle_image','vehicle_name', 'vehicle_make', 'vehicle_model',
+                       #'year','license','vin','starting_odometer','primary_meter','vehicle_type','vehicle_status']
+        fields = ['vehicle_image','vehicle_name', 'year','vehicle_type','vehicle_status']
+        widgets={
+            'vehicle_name':forms.TextInput(attrs={'class':'form-control','placeholder':'vehicle name'}),
+            'year':forms.TextInput(attrs={'class':'form-control','placeholder':'year'}),
+           
+            #form-control here is the css class that we are passing
+        }
+        #fields='__all__'# this was used because of an error when running and the error said " .
         
 
 class VehicleDetailsUpdateForm(forms.ModelForm):
     class Meta:
         model = AllifmaalVehiclesTable1
-        fields = ['vehicle_image','vehicle_name', 'vehicle_make', 'vehicle_model',
-                       'year','license','vin','starting_odometer','primary_meter','vehicle_type','vehicle_status']
+        #fields = ['vehicle_image','vehicle_name', 'vehicle_make', 'vehicle_model',
+                       #'year','license','vin','starting_odometer','primary_meter','vehicle_type','vehicle_status']
+        fields = ['vehicle_image','vehicle_name', 'year','vehicle_type','vehicle_status']
         widgets={
             'vehicle_name':forms.TextInput(attrs={'class':'form-control','placeholder':'vehicle name'}),
-            'vehicle_make':forms.TextInput(attrs={'class':'form-control','placeholder':'vehicle make'}),
-            'vehicle_model':forms.TextInput(attrs={'class':'form-control','placeholder':'vehicle model'}),
             'year':forms.TextInput(attrs={'class':'form-control','placeholder':'year'}),
-            'license':forms.TextInput(attrs={'class':'form-control','placeholder':'license'}),
-            'vin':forms.TextInput(attrs={'class':'form-control','placeholder':'vin'}),
-            'year':forms.TextInput(attrs={'class':'form-control','placeholder':'year'}),
-            'starting_odometer':forms.NumberInput(attrs={'class':'form-control','placeholder':'starting odometer'}),
-            'primary_meter':forms.TextInput(attrs={'class':'form-control','placeholder':'primary meter'}),
-            'vehicle_type':forms.TextInput(attrs={'class':'form-control','placeholder':'vehicle_type'}),
-            'vehicle_status':forms.TextInput(attrs={'class':'form-control','placeholder':'vehicle_status'}),
+           
             #form-control here is the css class that we are passing
         }
-        #fields='__all__'
-
 #form to upload files
 class UploadFileForm(forms.Form):
     title = forms.CharField(max_length=50)
