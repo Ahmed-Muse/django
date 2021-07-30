@@ -90,13 +90,13 @@
 <!-- end of deleted succesfully messge-->
 
 {{sum}}
+<div class="row">
 
-<div class="col-sm-10"><!--Start of second col-->
 
                 
 
                 <div class="form-group">
-                  <div class="col-sm-4">
+                  <div class="col-sm-10">
                   
                     <form method='POST' action=''>{% csrf_token %}
                         {{form|crispy}}<br><!-- this form is imported from the views under add_customers function and it was initially creaate
@@ -108,10 +108,14 @@
                     
                     
                 
-        </div><!--End of second col-->
+        <!--End of second col-->
+        <div class="col-sm-2">
+        <img src="{% static 'images/software.jpeg' %}" alt="San Francisco" width="350" height="350" >
+        </div>
 
             </div><!--End of display table-->
         </div>
+        
   </div>
 </main>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

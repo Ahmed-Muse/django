@@ -188,3 +188,10 @@ class UploadBookForm(forms.ModelForm):
         model = UploadFileTable1
         fields = ['title', 'author', 'image_file','cover']
         fields='__all__'
+
+
+#BELOW IS FOR ADDING GENDER FROM THE UI
+class AddStaffGenderForm(forms.ModelForm):
+    class Meta:
+        model =  AllifmaalHRMTable2Gender
+        fields = ['gender']

@@ -151,10 +151,10 @@ and is what is making font of the sidebar to be very small...try to get another 
                         var myChart1 = new Chart(ctx, {
                             type: 'pie',
                             data: {
-                                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                                labels: [{% for items in query_table_content %} '{{items.description}}', {% endfor %}],
                                 datasets: [{
-                                    label: 'Products',
-                                    data: [12, 19, 3, 5, 2, 3],
+                                label: 'AMD Stock',
+                                    data: [{% for items in query_table_content %} {{items.quantity_in_store}}, {% endfor %}],
                                     backgroundColor: [
                                         'rgba(255, 99, 132, 1)',
                                         'rgba(54, 162, 235, 1)',
@@ -195,10 +195,10 @@ and is what is making font of the sidebar to be very small...try to get another 
                         var myChart = new Chart(ctx, {
                             type: 'bar',
                             data: {
-                                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                                labels: [{% for items in query_table_content %} '{{items.description}}', {% endfor %}],
                                 datasets: [{
-                                    label: 'Products',
-                                    data: [12, 19, 3, 5, 2, 3],
+                                label: 'AMD Stock',
+                                    data: [{% for items in query_table_content %} {{items.quantity_in_store}}, {% endfor %}],
                                     backgroundColor: [
                                         'rgba(255, 99, 132, 1)',
                                         'rgba(54, 162, 235, 1)',

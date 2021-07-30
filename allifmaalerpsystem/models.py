@@ -19,7 +19,7 @@ class AllifmaalCustomersTable(models.Model):
 class AllifmaalStockTable1(models.Model):
     part_number = models.CharField(max_length=255, blank=True, null=True)# unique prevents data duplication
     description = models.CharField(max_length=255, blank=True, null=True)
-    quantity_in_store = models.IntegerField(blank=True,null=True)
+    quantity_in_store = models.IntegerField(blank=False,null=True)
     price = models.IntegerField(blank=True, null=True)
     comments = models.CharField(max_length=255, blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)#if adding now, pick currrent data and if updating stick to the original date
@@ -41,7 +41,14 @@ class AllifmaalStockTable1(models.Model):
     def __str__(self):
     		return self.part_number + ' ' + self.description # this will show up in the admin area
   
-  
+
+
+#below is for dynamically creating choice field for gender instead of hardcoding
+class AllifmaalHRMTable2Gender(models.Model):
+    gender = models.CharField(max_length=30, blank=True)
+
+    def __unicode__(self):
+        return self.gender
   #Choice field
 gender_choice = (
 		('Male', 'Male'),
@@ -57,6 +64,7 @@ class AllifmaalHRMTable2(models.Model):
     department = models.CharField(max_length=255, blank=True, null=True)
     #joined = models.DateTimeField(auto_now_add=True, auto_now=False, blank=True, null=True)#will add automatically and field
     #will disappear
+    #gender = models.ForeignKey(AllifmaalHRMTable2Gender, blank=True, null=True)#got errors
     joined = models.DateTimeField(auto_now_add=False, auto_now=False, blank=True, null=True)
     
     
@@ -64,7 +72,7 @@ class AllifmaalHRMTable2(models.Model):
     		return self.staff_number + ' ' + self.first_name + ' ' + self.last_name# this will show up in the admin area
   
   
-  
+  #
 
 #stock history table
 class AllifmaalStockHistoryTable(models.Model):

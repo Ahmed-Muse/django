@@ -168,9 +168,20 @@
                 
                 <td>{{records.comments}}</td>
                 <td>{{records.last_updated}}</td>
+                 <!--the if below ensures that the delete/change/add/update is done by only the admin/superuser-->
+                {% if perms.allifmaalerpsystem.update_AllifmaalStockTable1 %}
                 <td> <a href="{% url 'update_stock' records.id %}">Update</a></td>
+                {% else %}
+                <td>Update</td>
+
+                {% endif%}
+
+                <!--the if below ensures that the delete is done by only the admin/superuser-->
+                {% if perms.allifmaalerpsystem.delete_AllifmaalStockTable1 %}
                 <td> <a href="{% url 'delete_stock' records.id %}"><img src="{% static 'images/delete.png'%}" width="30"></a></td>
-                
+                {% else %}
+                <td> <img src="{% static 'images/delete.png'%}" width="30"></td>
+                {% endif %}
                 
                 </tr>
             {% endfor %}

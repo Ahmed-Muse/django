@@ -14,7 +14,7 @@
 <body>
     <link href="{% static 'css/style2.css' %}" rel="stylesheet">
     <a href="/">Website</a>
-    <a href="add_staff">Add Staff</a> 
+    <a href="{% url 'hrm' %}">HRM</a> 
    <hr><br>
   <h1> {{header}}</h1>
 
@@ -49,15 +49,25 @@
                 <table class="table table-hover table-dark">
                     <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>counter</th>
+                        <th>id</th>
+                        
                         <th>Staff Number</th>
                         <th>First Name</th>
+                        
                         <th>Middle Name</th>
-                        <th>Last Name</th>
+                        <th>last Name</th>
                         <th>Gender</th>
-                        <th>Title</th>
-                        <th>Department</th>
+                        <th>title</th>
+                        <th>department</th>
                         <th>Joined</th>
+                        
+                        
+                       
+                       
+                       
+                       
+                       
                         <th>Update</th>
                         <th>Delete</th>
                         
@@ -68,6 +78,7 @@
 
             
             <tr>
+                <td>{{forloop.counter}}</td>
                 <td>{{records.id}}</td>
                 <td>{{records.staff_number}}</td>
                 <td>{{records.first_name}}</td>
@@ -77,6 +88,13 @@
                 <td>{{records.title}}</td>
                 <td>{{records.department}}</td>
                 <td>{{records.joined}}</td>
+                
+                
+                
+                
+                
+                
+                
                 <td> <a href="{% url 'update_staff' records.id %}">Update</a></td>
                 <td> <a href="{% url 'delete_staff' records.id %}"><img src="{% static 'images/delete.png'%}" width="30"></a></td>
                 </tr>

@@ -31,7 +31,7 @@ def index(request):
     #so basically we are telling the views to pass whatever is contained in the context to the index.html page.
 
     return render(request,'index.html',context)
-#@login_required
+@login_required
 def customers(request):
     title="Allifmaal Customers"
     query_table_content = AllifmaalCustomersTable.objects.all()#assign all the objects in the table to the variable
@@ -89,7 +89,7 @@ def add_stock(request):
 
     return render(request,'add_stock.html',context)
 
-#@login_required
+@login_required
 def stock(request):
     header="Allifmaal Stock Management System "
     query_table_content = AllifmaalStockTable1.objects.all()#assign all the objects in the table to the variable
@@ -130,12 +130,14 @@ def stock(request):
 
     return render(request,'stock.html',context)
 
-
+@login_required
 def add_staff(request):
     form=AddStaffForm(request.POST or None)
     if form.is_valid():
         form.save()
+        
         messages.success(request, 'Staff added successfully')
+        form=AddStaffForm()#clears form
     context = {
 	"title": "Add Staff",
     "form": form
@@ -143,7 +145,21 @@ def add_staff(request):
 	}
 
     return render(request,'add_staff.html',context)
-#@login_required
+
+#below is for adding gender from the front end ui
+def settings(request):
+    title = 'Add staff gender'
+    form = AddStaffGenderForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        messages.success(request, 'Successfully Saved')
+        return redirect('/hrm')
+    context = {
+   "title": title,
+   "form": form,
+ }   
+    return render(request, "settings.html",context)
+@login_required
 def hrm(request):
     header="Allifmaal HRM Management System "
     query_table_content = AllifmaalHRMTable2.objects.all()#assign all the objects in the table to the variable
@@ -168,15 +184,15 @@ def hrm(request):
     return render(request,'hrm.html',context)
 
 #bellow givbes full details of the staff section
-def hrm_full_details(request,pk):
+@login_required
+def hrm_full_details(request):
     header="Allifmaal HRM Management System "
-    query_table_content = AllifmaalHRMTable2.objects.get(id=pk)
-    if request.method == 'POST':
-        query_table_content = AllifmaalHRMTable2.objects.all()
+    
+    query_table_content = AllifmaalHRMTable2.objects.all()
         
         
-        messages.success(request, 'Customer updated successfully')
-        return redirect('/hrm_full_details')
+        
+  
     context = {
         "header":header,
         "query_table_content":query_table_content,
@@ -184,7 +200,7 @@ def hrm_full_details(request,pk):
     return render(request,'hrm_full_details.html',context)
 
 
-#@login_required
+@login_required
 def dashboard(request):
     header="Allifmaal Sales Management System"
 
@@ -194,7 +210,7 @@ def dashboard(request):
 	}
 
     return render(request,'dashboard.html',context)
-#@login_required
+@login_required
 def eshop(request):
     header="Allifmaal Online Shop Management System"
 
@@ -206,6 +222,7 @@ def eshop(request):
 
 
 # UPDATE SECTIONS
+@login_required
 def update_customers(request, pk):
     query_table_content= AllifmaalCustomersTable.objects.get(id=pk)
     form = CustomerUpdateForm(instance=query_table_content)#insert the content of the table stored in the selected id in the update form
@@ -223,7 +240,7 @@ def update_customers(request, pk):
 
 # add the url below in the urls file
 ''' path('update_items/<str:pk>/', views.update_items, name="update_items"), '''
-
+@login_required
 def update_stock(request, pk):
     query_table_content= AllifmaalStockTable1.objects.get(id=pk)
     form = StockUpdateForm(instance=query_table_content)#insert the content of the table stored in the selected id in the update form
@@ -241,7 +258,7 @@ def update_stock(request, pk):
 
 # add the url below in the urls file
 ''' path('update_items/<str:pk>/', views.update_items, name="update_items"), '''
-
+@login_required
 def update_staff(request, pk):
     query_table_content= AllifmaalHRMTable2.objects.get(id=pk)
     form = StaffUpdateForm(instance=query_table_content)#insert the content of the table stored in the selected id in the update form
@@ -262,6 +279,7 @@ def update_staff(request, pk):
 
 
 #########  DELETE SECTION .................
+@login_required
 def delete_customer(request,pk):
     query_table_content=AllifmaalCustomersTable.objects.get(id=pk)
     if request.method =="POST":
@@ -269,7 +287,7 @@ def delete_customer(request,pk):
         messages.success(request,'Record deleted successfully')
         return redirect('/customers')
     return render(request,'delete_customer.html')	#return render(request, 'delete_customer.html')
-
+@login_required
 def delete_stock(request,pk):
     query_table_content=AllifmaalStockTable1.objects.get(id=pk)
     if request.method =="POST":
@@ -278,7 +296,7 @@ def delete_stock(request,pk):
         return redirect('/stock')
     return render(request,'delete_stock.html')
 
-
+@login_required
 def delete_staff(request,pk):
     query_table_content=AllifmaalHRMTable2.objects.get(id=pk)
     if request.method =="POST":
@@ -289,7 +307,7 @@ def delete_staff(request,pk):
 
 ##########3... END DELETE SECTION
 
-
+@login_required
 def stock_details(request, pk):
     query_table_content = AllifmaalStockTable1.objects.get(id=pk)
     context = {
@@ -300,7 +318,7 @@ def stock_details(request, pk):
 
 
 #ISSUE AND RECEIVE SECTIONS
-
+@login_required
 def issue_items(request, pk):
     query_table_content = AllifmaalStockTable1.objects.get(id=pk)
     form = IssueItemForm(request.POST or None, instance=query_table_content)
@@ -308,6 +326,7 @@ def issue_items(request, pk):
         instance = form.save(commit=False)
         instance.receive_quantity=0
         instance.quantity_in_store -= instance.issue_quantity
+        #instance.sum=instance.price*instance.quantity_in_store
         #instance.quantity=instance.quantity - instance.issue_quantity
 
         #instance.issue_by = str(request.user)
@@ -325,6 +344,7 @@ def issue_items(request, pk):
     return render(request, "add_stock.html", context)
 
 #receive sections
+@login_required
 def receive_items(request, pk):
     query_table_content = AllifmaalStockTable1.objects.get(id=pk)
     form = ReceiveItemForm(request.POST or None, instance=query_table_content)
@@ -345,6 +365,7 @@ def receive_items(request, pk):
     return render(request, "add_stock.html", context)
 
 #reorder level view
+@login_required
 def reorder_level(request,pk):
     query_table_content =AllifmaalStockTable1.objects.get(id=pk)
     form=StockReorderLevelForm(request.POST or None,instance=query_table_content)
@@ -361,6 +382,7 @@ def reorder_level(request,pk):
 
 #view for history table
 #@login_required
+@login_required
 def stock_history(request):
     header = 'LIST OF ITEMS'
     query_table_content = AllifmaalStockHistoryTable.objects.all()
@@ -389,6 +411,7 @@ def stock_history(request):
 
 
 #delete records of history table
+@login_required
 def delete_history_record(request,pk):
     query_table_content=AllifmaalStockHistoryTable.objects.get(id=pk)
     if request.method =="POST":
@@ -426,7 +449,7 @@ def calc(request):
 	}
 
     return render(request,'calc.html',context)
-
+@login_required
 def vehicles(request):
     header="Allifmaal Online Shop Management System"
     query_table_content = AllifmaalVehiclesTable1.objects.all()
@@ -446,7 +469,7 @@ def vehicles(request):
 
 	}
     return render(request,'vehicles.html',context)
-
+@login_required
 def delete_vehicle(request,pk):
     query_table_content=AllifmaalVehiclesTable1.objects.get(id=pk)
     if request.method =="POST":
@@ -455,7 +478,7 @@ def delete_vehicle(request,pk):
         return redirect('/vehicles')
     return render(request,'delete_vehicle.html')
 
-
+@login_required
 def update_vehicle_details(request, pk):
     query_table_content= AllifmaalVehiclesTable1.objects.get(id=pk)
     form = VehicleDetailsUpdateForm(instance=query_table_content)#insert the content of the table stored in the selected id in the update form
@@ -530,7 +553,7 @@ def main_view(request):
 	}
     return render(request, 'chart.html',context)
 
-
+@login_required
 def chartview(request):
     title="Allifmaal Stock Management System "
     query_table_content = AllifmaalStockTable1.objects.all()#assign all the objects in the table to the variable
@@ -540,12 +563,20 @@ def chartview(request):
      "title": title,
     }
     return render(request,'charts.html',context)
-
+@login_required
 def dashboard_inventory(request):
     title="inventory dashboard"
+    title="Allifmaal Stock Management System "
+    query_table_content = AllifmaalStockTable1.objects.all()#assign all the objects in the table to the variable
+    context = {#without context, you will not see the form in the page
+
+	    "query_table_content": query_table_content,
+     "title": title,
+    }
+    return render(request,'dashboard_inventory.html',context)
    
 
-    return render(request,'dashboard_inventory.html')
+    
 
 def staff(request):
     title="inventory dashboard"

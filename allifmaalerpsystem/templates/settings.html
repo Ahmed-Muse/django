@@ -1,0 +1,68 @@
+
+{% load crispy_forms_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
+    <!-- start for ticking time REACT libraries-->
+  
+    <title>Test React</title>
+    <script src= "https://unpkg.com/react@16/umd/react.production.min.js"></script>
+    <script src= "https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    
+   
+    
+</head>
+<body>
+    <link href="{% static 'css/stylecalc.css' %}" rel="stylesheet">
+    <link href="{% static 'css/stylescalc2.css' %}" rel="stylesheet">
+    
+    
+    
+    <li><a href="/">Website</a></li> 
+    
+
+    
+	
+
+
+    <div class="jumbotron">
+        <div class="row">
+           {% if request.user.is_authenticated %}
+           <div class="col-sm-6">
+          <h1>{{title}}</h1>
+           <form method="post" action="">
+             {% csrf_token %}
+             {{form|crispy}}
+             <input class="btn btn-primary" type="submit" value="Save" />
+          </form>
+          </div><!-- first col-sm-6 -->
+          {% endif %}
+         </div><!-- first row -->
+     </div>
+
+  
+   
+    
+
+       
+    
+        
+</body>
+<script src="{% static 'js/scripts.js' %}"></script> <!--this link works only here, outside body-->
+<script src="{% static 'js/scriptcalc2.js' %}"></script>
+</html>

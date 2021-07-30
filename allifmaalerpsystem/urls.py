@@ -64,7 +64,9 @@ urlpatterns = [
     path('userslist/', views.userslist, name='userslist'),
     path('login/', views.login, name='login'),
     path('hrm_full_details/', views.hrm_full_details, name='hrm_full_details'),
-    path('hrm_full_details/<str:pk>/', views.hrm_full_details, name="hrm_full_details"),
+    #path('hrm_full_details/<str:pk>/', views.hrm_full_details, name="hrm_full_details"),
+    #path(r'^settings/$', 'djangoapp.views.settings', name='settings'),
+    path('settings/', views.settings, name='settings'),
     
     
     
