@@ -67,6 +67,9 @@ urlpatterns = [
     #path('hrm_full_details/<str:pk>/', views.hrm_full_details, name="hrm_full_details"),
     #path(r'^settings/$', 'djangoapp.views.settings', name='settings'),
     path('settings/', views.settings, name='settings'),
+    path('invoice/', views.invoice, name='invoice'),
+    path('add_invoice/', views.add_invoice, name='add_invoice'),
+    path('list_invoice/', views.list_invoice, name='list_invoice'),
     
     
     

@@ -28,3 +28,14 @@ admin.site.register(AllifmaalStockTable1,AddStockAdmin)
 
 #to login is allifmaal and upto id
 admin.site.register(Sale)
+
+
+#below is for the invoice part..
+#below code customizes the the look of the admin page
+class InvoiceAdmin(admin.ModelAdmin):
+    list_display = ['customer_name', 'invoice_number', 'invoice_date']
+    form = InvoiceForm
+    list_filter = ['customer_name']
+    search_fields = ['customer_name', 'invoice_number']
+#admin.site.register(InvoiceTable)
+admin.site.register(InvoiceTable, InvoiceAdmin)

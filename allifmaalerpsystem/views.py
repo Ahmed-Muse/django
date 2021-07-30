@@ -674,3 +674,34 @@ def login(request):
    
 
     return render(request,'login.html')
+
+
+#below is for the invoice
+def invoice(request):
+    title="invoice management system"
+    
+    context = {
+        "title":title,
+    }
+   
+
+    return render(request,'invoice.html',context)
+
+def add_invoice(request):
+    form = InvoiceFormFull(request.POST or None)
+    if form.is_valid():
+	    form.save()
+    context = {
+		"form": form,
+		"title": "New Invoice",
+	}
+    return render(request, "add_invoice.html", context)
+
+def list_invoice(request):
+    title = 'List of Invoices'
+    queryset = InvoiceTable.objects.all()
+    context = {
+		"title": title,
+		"queryset": queryset,
+	}
+    return render(request, "list_invoice.html", context)

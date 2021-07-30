@@ -142,6 +142,8 @@ STATICFILES_DIRS =[
     ]
 STATIC_ROOT = os.path.join(BASE_DIR,'static')#THIS IS FOR PRODUCTION
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -160,7 +162,7 @@ MEDIA_URL='/media/'#fetch images/media using this path when viewing through the 
 
 #bellow is for sending email
 EMAIL_HOST='smtp.gmail.com'
-EMAIL_PORT='587'
+EMAIL_PORT=587
 EMAIL_HOST_USER='axmedmusadir@gmail.com'
 EMAIL_HOST_PASSWORD='amd123100%'
 EMAIL_USE_TLS=True
