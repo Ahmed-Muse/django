@@ -4,4 +4,100 @@
 {% load static %}
 
 {% block content %}
+
+<!--start for the modal part-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"><!--opens modals
+and is what is making font of the sidebar to be very small...try to get another link that opens the modal-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<!--this is important for the date picker-->
+<link href="{% static 'js/jquery-ui-1.12.1/jquery-ui.min.css' %}" rel="stylesheet">
+<link href="{% static 'js/jquery-ui-1.12.1/jquery-ui.structure.min.css' %}" rel="stylesheet">
+<link href="{% static 'js/jquery-ui-1.12.1/jquery-ui.theme.min.css' %}" rel="stylesheet">
+<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'js/jquery-ui-1.12.1/jquery-ui.min.js' %}"></script>
+<script src="{% static 'js/myjs.js' %}"></script>
+<!--end of date picker-->
+
+<!-- Trigger the modal with a button -->
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Mileage</button>
+<table class="table table-hover table-dark">
+    <thead>
+      <tr>
+       
+        <th scope="col">Profile image</th>
+        <th scope="col">Name</th>
+        <th scope="col">Vehicle name</th>
+        <th scope="col">Date</th>
+        <th scope="col">View</th>
+        
+      </tr>
+    </thead>
+
+    
+    <tbody>
+      
+      <tr>
+        <td>image</td>
+        <td>Rotich</td>
+        <td>Lexus</td>
+        <td>02/08/2021</td>
+        <td>More</td>
+      </tr>
+      <tr>
+        <td>image</td>
+        <td>Rotich</td>
+        <td>Lexus</td>
+        <td>02/08/2021</td>
+        <td>More</td>
+      </tr>
+      <tr>
+        <td>image</td>
+        <td>Rotich</td>
+        <td>Lexus</td>
+        <td>02/08/2021</td>
+        <td>More</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!--start of modal part-->
+<div class="container">
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Vehicle Details</h4>
+            
+          </div>
+          <div class="modal-body">
+  
+  
+            <div class="form-group">
+              <div class="col-sm-4">
+            <form method="post" enctype="multipart/form-data">
+              
+              {% csrf_token %}
+                {{form|crispy}}
+                <button type="submit" class="btn btn-success">Save</button>
+               
+            </form>
+          </div></div>
+  
+           
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--end of modal part-->
 {%endblock%}

@@ -78,12 +78,20 @@ def add_customers(request):
 def add_stock(request):
     title="Add Stock"
     form=AddStockForm(request.POST or None)
+    
+    #start for showing most recently added stocks
+    total_stock = AllifmaalStockTable1.objects.count()# this is for showing the recently added stock
+    queryset =  AllifmaalStockTable1.objects.order_by('-timestamp')[:6]
+    
+    #end of for showing most recently added stocks
     if form.is_valid():
         form.save()
         messages.success(request, 'Stock added successfully')
     context = {
 	"title": "Add Stock",
- "form": form
+    "form": form,
+    "total_stock": total_stock,
+    "queryset":queryset,
 
 	}
 
@@ -326,7 +334,7 @@ def issue_items(request, pk):
         instance = form.save(commit=False)
         instance.receive_quantity=0
         instance.quantity_in_store -= instance.issue_quantity
-        #instance.sum=instance.price*instance.quantity_in_store
+        #instance.line_total=instance.price*instance.quantity_in_store
         #instance.quantity=instance.quantity - instance.issue_quantity
 
         #instance.issue_by = str(request.user)
@@ -640,10 +648,29 @@ def dailytimesheet(request):
 
     return render(request,'dailytimesheet.html')  
 def dailymileage(request):
-    title="inventory dashboard"
-   
+    header="Allifmaal Online Shop Management System"
+    query_table_content = VehiclesDailyMileageTable.objects.all()
+    a=10
+    b=20
+    sum=a+b
+    if request.method == 'POST':
+        form=AddVehicleDailyMileageForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Vehicle mileage added successfully')
+            return redirect('dailymileage')
+    else:
+        form=AddVehicleDailyMileageForm()
 
-    return render(request,'dailymileage.html')
+    context = {
+	"header": header,
+    "form":form,
+    "query_table_content":query_table_content,
+    "sum":sum,
+
+	}
+    return render(request,'dailymileage.html',context)
+
 def fillups(request):
     title="inventory dashboard"
    

@@ -15,7 +15,7 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/navbar-fixed/">
 
     <!-- Bootstrap core CSS -->
-<link href="{% static 'css/style2.css' %}" rel="stylesheet">
+
 <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
 
 
@@ -39,6 +39,27 @@
     <link href="navbar-top-fixed.css" rel="stylesheet">
   </head>
   <body>
+
+
+ <!--start of recently added stock -->
+ <div class="recent">
+  <span class="">Total stock items</span>
+  <span class="">{{total_stock}}</span>
+  <br><br>
+  {% for instance in queryset %}
+      <div>
+        <div class="">{{instance.part_number}}</div>
+        <div class="">{{instance.timestamp}}</div>
+      </div>
+      
+  {% endfor %}
+</div>
+
+<!--end of recently added stock-->
+
+
+
+
       <br><br>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-lightblue">
   <a class="navbar-brand" href="/">Website</a>
@@ -58,7 +79,7 @@
 
 <main role="main" class="container">
   
-    <link href="{% static 'css/style2.css' %}" rel="stylesheet">
+    
     
 
     
@@ -113,6 +134,22 @@
         <img src="{% static 'images/software.jpeg' %}" alt="San Francisco" width="350" height="350" >
         </div>
 
+        <!--start of recently added stock -->
+        <div class="recent">
+          <span class="">Recent invoices</span>
+          <span class="">{{total_stock}}</span>
+          <br><br>
+          {% for instance in queryset %}
+              <div>
+                <div class="">{{instance.part_number}}</div>
+                <div class="">{{instance.timestamp}}</div>
+              </div>
+              
+          {% endfor %}
+        </div>
+
+        <!--end of recently added stock-->
+
             </div><!--End of display table-->
         </div>
         
@@ -120,4 +157,18 @@
 </main>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
       <script>window.jQuery || document.write('<script src="/docs/4.4/assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="/docs/4.4/dist/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script></body>
-</html>
+
+
+
+
+
+<!--start of practicing charts.org-->
+<script>
+ 
+</script>
+<!--end of practicing charts.org-->
+
+
+
+
+      </html>

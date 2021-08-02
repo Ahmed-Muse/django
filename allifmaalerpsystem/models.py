@@ -3,6 +3,7 @@ from datetime import datetime, date
 
 # Create your models here.
 
+
 #below is the customers details models/table
 class AllifmaalCustomersTable(models.Model):
     customer_name = models.CharField(max_length=255, blank=True, null=True)
@@ -31,6 +32,8 @@ class AllifmaalStockTable1(models.Model):
     issue_to = models.CharField(max_length=50,blank=True,null=True)
     created_by = models.CharField(max_length=50,blank=True,null=True)
     reorder_level = models.IntegerField(default='0',blank=True,null=True)
+    line_total = models.IntegerField(default='0',blank=True, null=True)
+    sum_total = models.IntegerField(default='0',blank=True, null=True)
     
     class meta:
         verbose_name_plural ='Stock data in Allifmaal'#this is what will appear on the admin description
@@ -206,3 +209,31 @@ class InvoiceTable(models.Model):
 
     def __str__(self):
         	return self.customer_name + ' ' + self.line_one +'  '+ str(self.invoice_number)
+     
+class VehiclesDailyMileageTable(models.Model):
+    vehicle_type_options = (
+		('Truck', 'Truck'),
+		('Car', 'Car'),
+        ('Pickup','Pickup'),
+        ('Bus', 'Bus'),
+        ('Trailer', 'Trailer'),
+        ('Van','Van'),
+        ('Tow Truck','Tow Truck'),
+        ('Motorcycle','Motorcycle'),
+	)
+    vehicle_operator_options = (
+		('Arnold', 'Arnold'),
+		('Rotich', 'Rotich'),
+	)
+    vehicle_type = models.CharField(max_length=255, blank=True, null=True,choices=vehicle_type_options)
+    vehicle_operator = models.CharField(max_length=255, blank=True, null=True,choices=vehicle_operator_options)
+    mileage_date = models.DateTimeField(auto_now_add=False, auto_now=False, blank=True, null=True)
+   
+    starting_odometer = models.IntegerField(default='0',blank=True,null=True)
+    ending_odometer = models.IntegerField(default='0',blank=True,null=True)
+    notes = models.CharField(max_length=1000, blank=True, null=True)
+    
+    def __str__(self):
+        return self.vehicle_type
+    
+    

@@ -19,7 +19,7 @@ class CustomerSearchForm(forms.ModelForm):
 class AddStockForm(forms.ModelForm): #the forms here is the one imported up there.
     class Meta:
         model = AllifmaalStockTable1
-        fields = ['part_number', 'description', 'quantity_in_store','price','comments']
+        fields = ['part_number', 'description', 'quantity_in_store','price','comments','line_total','sum_total']
         
         widgets={
             'part_number':forms.TextInput(attrs={'class':'form-control','placeholder':'part number','background-color':'red'}),
@@ -218,3 +218,19 @@ class InvoiceForm(forms.ModelForm):
 				'line_one', 'line_one_quantity', 'line_one_unit_price', 'line_one_total_price',
 				'total', 'paid', 'invoice_type',
 				]
+         
+class AddVehicleDailyMileageForm(forms.ModelForm): #the forms here is the one imported up there.
+    class Meta:
+        model = VehiclesDailyMileageTable
+        fields = ['vehicle_type', 'vehicle_operator', 'mileage_date','starting_odometer','ending_odometer','notes']
+        
+        widgets={
+            
+            'mileage_date':forms.DateTimeInput(attrs={'class':'form-control','placeholder':'Mileage Date'}),
+            'starting_odometer':forms.NumberInput(attrs={'class':'form-control','placeholder':'Starting Odometer'}),
+            'ending_odometer':forms.NumberInput(attrs={'class':'form-control','placeholder':'Ending Odometer'}),
+            'notes':forms.TextInput(attrs={'class':'form-control','placeholder':'Notes'}),
+            #form-control here is the css class that we are passing
+        }
+        
+            
